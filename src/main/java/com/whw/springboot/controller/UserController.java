@@ -36,7 +36,7 @@ public class UserController {
 	private UserService userService;
 
 	/**
-	 * 注册用户
+	 * 注册用户.
 	 */
 	@ApiOperation(value = "注册用户需要学号")
 	@PostMapping(value = "user")
