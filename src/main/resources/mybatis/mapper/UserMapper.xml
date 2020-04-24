@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.whw.springboot.entity.User">
+    <!--@mbg.generated-->
+    <!--@Table user-->
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+
+    <result column="user_openid" jdbcType="VARCHAR" property="userOpenId" />
+
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+
+    <result column="user_idcard4" jdbcType="VARCHAR" property="userIdCard4" />
+
+
+
+
+  </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        user_id, user_openid,  user_pwd,  user_idcard4
+    </sql>
+
+    <sql id="select">
+  	SELECT
+	*
+FROM
+	`user`
+	LEFT JOIN userinfo ON `user`.user_id = userinfo.user_id
+
+  </sql>
+    <insert id="insertUser" parameterType="com.whw.springboot.entity.UserNumber">
+        <!--@mbg.generated-->
+        insert into user (user_id, user_openid,user_pwd,user_idcard4)
+        values (#{user_id,jdbcType=VARCHAR},#{user_openid,jdbcType=VARCHAR},#{user_pwd,jdbcType=VARCHAR},#{user_idcard4,jdbcType=VARCHAR})
+    </insert>
+
+    <select id="CheckUserById" parameterType="com.whw.springboot.entity.UserNumber" resultMap="BaseResultMap">
+    <include refid="select" />
+        <where>
+            <if test="user_id !=null ">
+                `user`.user_id=#{user_id}
+            </if>
+            <if test=" user_openid != null">
+                and `user`.user_openid=#{user_openid}
+            </if>
+            <if test="user_pwd !=null">
+                and `user`.user_pwd=#{user_pwd}
+            </if>
+        </where>
+    </select>
+
+    <update id="changePwd" parameterType="com.whw.springboot.entity.UserNumber">
+        <!--@mbg.generated-->
+        update user
+        <set>
+            user_pwd = #{user_pwd,jdbcType=VARCHAR}
+        </set>
+        where user_id = #{user_id,jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>
