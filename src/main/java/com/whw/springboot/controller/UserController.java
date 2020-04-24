@@ -1,7 +1,7 @@
 package com.whw.springboot.controller;
 
 import java.io.IOException;
-import java.util.List;
+
 
 import com.whw.springboot.entity.User;
 import com.whw.springboot.entity.Userinfo;
@@ -10,7 +10,7 @@ import com.whw.springboot.service.UserService;
 import com.whw.springboot.utils.OpenId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +32,7 @@ import io.swagger.annotations.ApiOperation;
 public class UserController {
 
 	// 依赖注入UserService
+
 	@Autowired
 	private UserService userService;
 
@@ -70,7 +71,7 @@ public class UserController {
 
 	/**
 	 * 修改密码
-	 * @return
+	 *
 	 */
 	@ApiOperation(value = "修改密码")
 	@PutMapping(value = "update")

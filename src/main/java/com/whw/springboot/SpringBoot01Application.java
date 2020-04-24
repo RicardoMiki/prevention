@@ -9,7 +9,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @MapperScan(value = "com.whw.springboot.mapper")
-
 @SpringBootApplication
 public class SpringBoot01Application {
 
