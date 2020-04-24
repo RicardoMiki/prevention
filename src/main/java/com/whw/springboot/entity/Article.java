@@ -35,7 +35,7 @@ public class Article {
     private Userinfo adminUser;
 
     /**
-     * 文章可见范围（全部或学部编号）
+     * 文章可见范围（全部或学部编号）.
      */
     @ApiModelProperty(value="文章可见范围（全部或学部编号）,全体是0")
     private String articleScope;
