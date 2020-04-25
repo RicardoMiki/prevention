@@ -42,10 +42,6 @@ public class UserController {
 	@ApiOperation(value = "注册用户需要学号")
 	@PostMapping(value = "user")
 	public Userinfo insertUser(UserNumber userNumber) {
-		System.out.println("1"+userNumber);
-		/**
-		 * CheckRegister怀疑涉及连表查询
-		 */
 		Userinfo userinfo = userService.CheckRegister(userNumber);
 		if (userinfo != null)
 			if (userService.insertUser(userNumber)){

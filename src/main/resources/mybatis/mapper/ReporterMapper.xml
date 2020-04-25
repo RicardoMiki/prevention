@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.ReporterMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Reporter">
+        <!--@mbg.generated-->
+        <!--@Table reporter-->
+        <id column="reporter_id" jdbcType="INTEGER" property="reporterId" />
+        <result column="reporter_stuid" jdbcType="VARCHAR" property="reporterStuId" />
+        <result column="reporter_title" jdbcType="VARCHAR" property="reporterTitle" />
+        <result column="reporter_text" jdbcType="VARCHAR" property="reporterText" />
+        <result column="reporter_date" jdbcType="DATE" property="reporterDate" />
+        <result column="reporter_emailid" jdbcType="INTEGER" property="reporterEmailId" />
+        <result column="reporter_reply" jdbcType="VARCHAR" property="reporterReply" />
+        
+        <association property="email" javaType="com.whw.springboot.entity.Email">
+            <id column="email_id" jdbcType="INTEGER" property="emailId" />
+            <result column="email_name" jdbcType="VARCHAR" property="emailName" />
+        </association>
+
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+            <id column="user_id" jdbcType="VARCHAR" property="userId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+
+            <result column="class_id" jdbcType="INTEGER" property="classId" />
+
+            <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+            <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+            <result column="user_type" jdbcType="INTEGER" property="userType" />
+        </association>
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        SELECT
+        reporter_id, reporter_stuid, reporter_title, reporter_text, reporter_date, reporter_emailid, reporter_reply
+
+
+    </sql>
+
+    <sql id="select">
+    select
+    *
+    FROM
+        'reporter'
+        LEFT JOIN email on `reporter`.email_id = email.email_id
+        LEFT JOIN userinfo on `reporter`.reporter_stuid = userinfo.user_id
+    </sql>
+
+    <insert id="insertReporter" parameterType="com.whw.springboot.entity.Reporter">
+        <!--@mbg.generated-->
+        insert into reporter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="reporterId != null">
+                reporter_id,
+            </if>
+            <if test="reporterStuId != null">
+                reporter_stuid,
+            </if>
+            <if test="reporterTitle != null">
+                reporter_title,
+            </if>
+            <if test="reporterText != null">
+                reporter_text,
+            </if>
+            <if test="reporterDate != null">
+                reporter_date,
+            </if>
+            <if test="reporterEmailId != null">
+                reporter_emailid,
+            </if>
+            <if test="reporterReply != null">
+                reporter_reply,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="reporterId != null">
+                #{reporterId,jdbcType=INTEGER},
+            </if>
+            <if test="reporterStuId != null">
+                #{reporterStuId,jdbcType=VARCHAR},
+            </if>
+            <if test="reporterTitle != null">
+                #{reporterTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="reporterText != null">
+                #{reporterText,jdbcType=VARCHAR},
+            </if>
+            <if test="reporterDate != null">
+                #{reporterDate,jdbcType=DATE},
+            </if>
+            <if test="reporterEmailId != null">
+                #{reporterEmailId,jdbcType=INTEGER},
+            </if>
+            <if test="reporterReply != null">
+                #{reporterReply,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="queryAllReporter" parameterType="com.whw.springboot.entity.Reporter" resultMap="BaseResultMap">
+        SELECT
+        reporter_id, reporter_stuid, reporter_title, reporter_text, reporter_date, reporter_emailid, reporter_reply
+        FROM reporter
+
+        <where>
+            <if test="reporterId != null">
+                reporter_id=#{reporterId}
+            </if>
+            <if test="reporterStuId != null">
+                and reporter_stuid=#{reporterStuId}
+            </if>
+            <if test="reporterTitle != null">
+                and reporter_title=#{reporterTitle}
+            </if>
+            <if test="reporterText != null">
+                and reporter_text=#{reporterText}
+            </if>
+            <if test="reporterDate != null">
+                and reporter_date=#{reporterDate}
+            </if>
+            <if test="reporterEmailId != null">
+                and reporter_emailid=#{reporterEmailId}
+            </if>
+            <if test="reporterReply != null">
+                and reporter_reply=#{reporterReply}
+            </if>
+        </where>
+        GROUP BY reporter.reporter_id
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from reporter
+        where reporter.reporter_id = #{reporterId,jdbcType=INTEGER}
+    </delete>
+
+    <update id="updataReporter" parameterType="com.whw.springboot.entity.Reporter">
+        <!--@mbg.generated-->
+        update reporter
+        <set>
+            <if test="reporter_stuid != null">
+                reporter_stuid=#{reporter_stuid,jdbcType=VARCHAR}
+            </if>
+            <if test="reporter_title != null">
+                reporter_title=#{reporter_title,jdbcType=VARCHAR}
+            </if>
+            <if test="reporter_text != null">
+                reporter_text=#{reporter_text,jdbcType=VARCHAR}
+            </if>
+            <if test="reporter_date != null">
+                reporter_date=#{reporter_date,jdbcType=DATE}
+            </if>
+            <if test="reporter_emailid != null">
+                reporter_emailid=#{reporter_emailid,jdbcType=INTEGER}
+            </if>
+            <if test="reporter_reply != null">
+                reporter_reply=#{reporter_reply,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where reporter_id = #{reporterId,jdbcType=INTEGER}
+    </update>
+</mapper>

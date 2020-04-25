@@ -12,6 +12,16 @@
 
     <result column="user_idcard4" jdbcType="VARCHAR" property="userIdCard4" />
 
+      <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+          <id column="user_id" jdbcType="VARCHAR" property="userId" />
+          <result column="dep_id" jdbcType="INTEGER" property="depId" />
+          <result column="class_id" jdbcType="INTEGER" property="classId" />
+          <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+          <result column="user_name" jdbcType="VARCHAR" property="userName" />
+          <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+          <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+          <result column="user_type" jdbcType="INTEGER" property="userType" />
+      </association>
 
 
 
@@ -25,8 +35,8 @@
   	SELECT
 	*
 FROM
-	`user`
-	LEFT JOIN userinfo ON `user`.user_id = userinfo.user_id
+	`userinfo`
+	LEFT JOIN user ON `user`.user_id = userinfo.user_id
 
   </sql>
     <insert id="insertUser" parameterType="com.whw.springboot.entity.UserNumber">
@@ -44,11 +54,13 @@ FROM
             <if test=" user_openid != null">
                 and `user`.user_openid=#{user_openid}
             </if>
-            <if test="user_pwd !=null">
-                and `user`.user_pwd=#{user_pwd}
+            <if test=" user_user_pwd != null">
+                and `user`.user_pwd=#{user_user_pwd}
             </if>
         </where>
     </select>
+
+
 
     <update id="changePwd" parameterType="com.whw.springboot.entity.UserNumber">
         <!--@mbg.generated-->

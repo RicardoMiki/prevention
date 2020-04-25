@@ -33,7 +33,6 @@ public class UserinfoController {
     /**
      * 修改userinfo
      *
-
      */
     @ApiOperation(value = "按照userinfo 必须传入id 其他信息按照需求即可")
     @PutMapping( value = "userinfo")

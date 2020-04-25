@@ -16,7 +16,7 @@ public interface UserMapper {
 
 	User CheckUserById(UserNumber userNumber);
 
-	Userinfo CheckRegister(UserNumber userNumber);
+
 
 	int changePwd(String user_id,String user_pwd);
 

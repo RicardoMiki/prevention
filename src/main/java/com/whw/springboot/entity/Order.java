@@ -61,4 +61,11 @@ public class Order {
      */
     @ApiModelProperty(value = "就诊预约状态  0：预约失败 1:预约成功 2预约中 3:已过期 4：就诊完成")
     private int orderStatus;
+
+
+    private String hotelid;
+    private int Sum;
+    Order order = new Order();
+
+
 }
