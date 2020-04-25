@@ -32,7 +32,7 @@
     </resultMap>
     
     <sql id="Base_Column_List">
-        SELECT
+
         reporter_id, reporter_stuid, reporter_title, reporter_text, reporter_date, reporter_emailid, reporter_reply
 
 
@@ -42,9 +42,9 @@
     select
     *
     FROM
-        'reporter'
-        LEFT JOIN email on `reporter`.email_id = email.email_id
-        LEFT JOIN userinfo on `reporter`.reporter_stuid = userinfo.user_id
+        reporter
+        LEFT JOIN `email` on reporter.reporter_emailid = `email`.email_id
+        LEFT JOIN `userinfo` on reporter.reporter_stuid = `userinfo`.user_id
     </sql>
 
     <insert id="insertReporter" parameterType="com.whw.springboot.entity.Reporter">
@@ -99,10 +99,7 @@
     </insert>
 
     <select id="queryAllReporter" parameterType="com.whw.springboot.entity.Reporter" resultMap="BaseResultMap">
-        SELECT
-        reporter_id, reporter_stuid, reporter_title, reporter_text, reporter_date, reporter_emailid, reporter_reply
-        FROM reporter
-
+        <include refid="select" />
         <where>
             <if test="reporterId != null">
                 reporter_id=#{reporterId}
@@ -126,7 +123,7 @@
                 and reporter_reply=#{reporterReply}
             </if>
         </where>
-        GROUP BY reporter.reporter_id
+
     </select>
 
     <delete id="deleteById" parameterType="java.lang.Integer">
@@ -135,27 +132,27 @@
         where reporter.reporter_id = #{reporterId,jdbcType=INTEGER}
     </delete>
 
-    <update id="updataReporter" parameterType="com.whw.springboot.entity.Reporter">
+    <update id="updataReporter" keyColumn="reporter_id" keyProperty="reporterId" parameterType="com.whw.springboot.entity.Reporter" useGeneratedKeys="true" >
         <!--@mbg.generated-->
         update reporter
         <set>
-            <if test="reporter_stuid != null">
-                reporter_stuid=#{reporter_stuid,jdbcType=VARCHAR}
+            <if test="reporterStuId != null">
+                reporter_stuid=#{reporterStuId,jdbcType=VARCHAR},
             </if>
-            <if test="reporter_title != null">
-                reporter_title=#{reporter_title,jdbcType=VARCHAR}
+            <if test="reporterTitle != null">
+                reporter_title=#{reporterTitle,jdbcType=VARCHAR},
             </if>
-            <if test="reporter_text != null">
-                reporter_text=#{reporter_text,jdbcType=VARCHAR}
+            <if test="reporterText != null">
+                reporter_text=#{reporterText,jdbcType=VARCHAR},
             </if>
-            <if test="reporter_date != null">
-                reporter_date=#{reporter_date,jdbcType=DATE}
+            <if test="reporterDate != null">
+                reporter_date=#{reporterDate,jdbcType=DATE},
             </if>
-            <if test="reporter_emailid != null">
-                reporter_emailid=#{reporter_emailid,jdbcType=INTEGER}
+            <if test="reporterEmailId != null">
+                reporter_emailid=#{reporterEmailId,jdbcType=INTEGER},
             </if>
-            <if test="reporter_reply != null">
-                reporter_reply=#{reporter_reply,jdbcType=VARCHAR}
+            <if test="reporterReply != null">
+                reporter_reply=#{reporterReply,jdbcType=VARCHAR},
             </if>
         </set>
         where reporter_id = #{reporterId,jdbcType=INTEGER}

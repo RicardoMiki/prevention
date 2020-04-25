@@ -1,6 +1,7 @@
 package com.whw.springboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,7 +17,7 @@ public class Reporter {
      *上报id
      */
     @ApiModelProperty(value = "上报id")
-    private int reporterId;
+    private Integer reporterId;
 
     /**
      *上报学生学号
@@ -47,11 +48,17 @@ public class Reporter {
      *上报接收邮箱id
      */
     @ApiModelProperty(value = "上报接收邮箱id")
-    private int reporterEmailId;
+    private Integer reporterEmailId;
 
     /**
      *回复内容
      */
     @ApiModelProperty(value = "回复内容")
     private String reporterReply;
+
+    @IgnoreSwaggerParameter
+    private Email email;
+
+    @IgnoreSwaggerParameter
+    private Userinfo userinfo;
 }
