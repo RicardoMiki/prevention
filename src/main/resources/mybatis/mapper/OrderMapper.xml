@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.OderMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Oder">
+        <!--@mbg.generated-->
+        <!--@Table reporter-->
+        <id column="order_id" jdbcType="INTEGER" property="orderId" />
+        <result column="order_userid" jdbcType="VARCHAR" property="orderUserId" />
+
+        <result column="order_docid" jdbcType="VARCHAR" property="orderDocId" />
+
+        <result column="order_date" jdbcType="DATE" property="orderDate" />
+        <result column="order_content" jdbcType="VARCHAR" property="orderContent" />
+        <result column="order_posttime" jdbcType="DATE" property="orderPostTime" />
+        <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+        <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+            <id column="user_id" jdbcType="VARCHAR" property="userId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+            <result column="class_id" jdbcType="INTEGER" property="classId" />
+            <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+            <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+            <result column="user_type" jdbcType="INTEGER" property="userType" />
+        </association>
+        
+        <association property="doctor" javaType="com.whw.springboot.entity.Doctor">
+            <id column="doc_id" jdbcType="VARCHAR" property="docId" />
+            <result column="doc_type" jdbcType="INTEGER" property="docType"/>
+            <result column="doc_clinicid" jdbcType="VARCHAR" property="docClinicId"/>
+        </association>
+
+    </resultMap>
+    
+    <sql id="Base_Column_List">
+        order_id, order_userid, order_docid, order_date, order_content, order_posttime, order_type, order_status
+    </sql>
+
+    <sql id="select">
+        select
+        *
+        FROM
+            oder
+            LEFT JOIN `userinfo` on oder.order_userid = `userinfo`.user_id
+            LEFT JOIN `doctor` on oder.order_docid = `doctor`.doc_id
+    </sql>
+    
+    <insert id="insertOrder" parameterType="com.whw.springboot.entity.Oder">
+        <!--@mbg.generated-->
+        insert into oder
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="orderUserId != null">
+                order_userid,
+            </if>
+            <if test="orderDocId != null">
+                order_docid,
+            </if>
+            <if test="orderDate != null">
+                order_date,
+            </if>
+            <if test="orderContent != null">
+                order_content,
+            </if>
+            <if test="orderPostTime != null">
+                order_posttime,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="orderStatus != null">
+                order_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderUserId != null">
+                #{orderUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDocId != null">
+                #{orderDocId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDate != null">
+                #{orderDate,jdbcType=DATE},
+            </if>
+            <if test="orderContent != null">
+                #{orderContent,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPostTime != null">
+                #{orderPostTime,jdbcType=DATE},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                #{orderStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    
+    <select id="queryAllOrder" parameterType="com.whw.springboot.entity.Oder" resultMap="BaseResultMap">
+        <include refid="select" />
+        <where>
+            <if test="orderId != null">
+                order_id = #{orderId}
+            </if>
+            <if test="orderUserId != null">
+                and order_userid = #{orderUserId}
+            </if>
+            <if test="orderDocId != null">
+                and order_docid = #{orderDocId}
+            </if>
+            <if test="orderDate != null">
+                and order_date = #{orderDate}
+            </if>
+            <if test="orderContent != null">
+                and order_content = #{orderContent}
+            </if>
+            <if test="orderPostTime != null">
+                and order_posttime = #{orderPostTime}
+            </if>
+            <if test="orderType != null">
+                and order_type = #{orderType}
+            </if>
+            <if test="orderStatus != null">
+                and order_status = #{orderStatus}
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteOderById" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from oder
+        where oder.order_id = #{orderId,jdbcType=INTEGER}
+    </delete>
+    
+    <update id="updateOrder" parameterType="com.whw.springboot.entity.Oder">
+        <!--@mbg.generated-->
+        update oder
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="orderUserId != null">
+                 order_userid = #{orderUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDocId != null">
+                 order_docid = #{orderDocId,jdbcType=VARCHAR},
+            </if>
+            <if test="orderDate != null">
+               order_date = #{orderDate,jdbcType=DATE},
+            </if>
+            <if test="orderContent != null">
+              order_content = #{orderContent,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPostTime != null">
+              order_posttime = #{orderPostTime,jdbcType=DATE},
+            </if>
+            <if test="orderType != null">
+             order_type = #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderStatus != null">
+                order_status = #{orderStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=INTEGER}
+    </update>
+</mapper>

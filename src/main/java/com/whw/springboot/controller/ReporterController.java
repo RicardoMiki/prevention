@@ -27,7 +27,7 @@ public class ReporterController {
      * 添加上报(reporterid返回值永远为0)
      */
     @ApiOperation(value = "添加上报(reporterid返回值永远为0)")
-    @PostMapping(value = "reporter")
+    @PostMapping(value = "insertReporter")
     public Reporter insertReporter(Reporter reporter){
         reporterService.insertReporter(reporter);
         return reporter;
@@ -37,7 +37,7 @@ public class ReporterController {
      * 查看全部上报传入需要的值
      */
     @ApiOperation(value = "查看全部上报传入需要的值")
-    @GetMapping(value = "query")
+    @GetMapping(value = "queryReporter")
     public List<Reporter> queryAllReporter(Reporter reporter){
         return reporterService.queryAllReporter(reporter);
     }
@@ -46,7 +46,7 @@ public class ReporterController {
      * 删除某条上报
      */
     @ApiOperation(value = "删除某条上报")
-    @DeleteMapping(value = "delete/{reporterId}")
+    @DeleteMapping(value = "deleteReporter/{reporterId}")
     public int deleteById(@PathVariable("reporterId") Integer reporterId){
         return reporterService.deleteById(reporterId);
     }
@@ -55,7 +55,7 @@ public class ReporterController {
      * 修改上报
      */
     @ApiOperation(value = "修改上报")
-    @PutMapping(value = "updata")
+    @PutMapping(value = "updataReporter")
     public int updataReporter( Reporter reporter){
         return reporterService.updataReporter(reporter);
     }

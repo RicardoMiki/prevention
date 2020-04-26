@@ -1,6 +1,7 @@
 package com.whw.springboot.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,12 +12,12 @@ import java.util.Date;
 @ApiModel(value="com-whw-springboot-entity-Order")
 @Data
 @NoArgsConstructor
-public class Order {
+public class Oder {
     /**
      * 就诊预约id
      */
     @ApiModelProperty(value = "就诊预约id")
-    private int orderId;
+    private Integer orderId;
 
     /**
      * 就诊预约用户id
@@ -54,18 +55,20 @@ public class Order {
      * 就诊类别 1：心理咨询室预约 2：医务室预约
      */
     @ApiModelProperty(value = "就诊类别 1：心理咨询室预约 2：医务室预约")
-    private int orderType;
+    private String orderType;
 
     /**
      * 就诊预约状态  0：预约失败 1:预约成功 2预约中 3:已过期 4：就诊完成
      */
     @ApiModelProperty(value = "就诊预约状态  0：预约失败 1:预约成功 2预约中 3:已过期 4：就诊完成")
-    private int orderStatus;
+    private String orderStatus;
 
 
-    private String hotelid;
-    private int Sum;
-    Order order = new Order();
+    @IgnoreSwaggerParameter
+    private Userinfo userinfo;
+
+    @IgnoreSwaggerParameter
+    private Doctor doctor;
 
 
 }

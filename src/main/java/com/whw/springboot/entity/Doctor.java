@@ -25,12 +25,12 @@ public class Doctor {
      * 医生类别 1：心理咨询室 2：医务室
      */
     @ApiModelProperty(value = "医生类别 1：心理咨询室 2：医务室")
-    private int docType;
+    private Integer docType;
 
     /**
      * 医务室id
      */
     @ApiModelProperty(value = "医务室id")
-    private String docClinicid;
+    private String docClinicId;
 
 }

@@ -13,7 +13,7 @@ public class Email {
      * 邮箱id
      */
     @ApiModelProperty(value = "邮箱id")
-    private int emailId;
+    private Integer emailId;
 
     /**
      * 邮箱号
