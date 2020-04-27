@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whw.springboot.mapper.ClinicMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Clinic">
+        <id column="clinic_id" jdbcType="INTEGER" property="clinicId" />
+        <result column="clinic_type" jdbcType="INTEGER" property="clinicType"/>
+        <result column="clinic_name" jdbcType="VARCHAR" property="clinicName"/>
+        <result column="clinic_local" jdbcType="VARCHAR" property="clinicLocal" />
+        <result column="clinic_call" jdbcType="VARCHAR" property="clinicCall"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        clinic_id, clinic_type, clinic_name, clinic_local, clinic_call
+    </sql>
+
+    <sql id="select">
+        SELECT
+        *
+        FROM
+        clinic
+    </sql>
+
+    <insert id="insertClinic" parameterType="com.whw.springboot.entity.Clinic">
+        insert into clinic (clinic_id, clinic_type, clinic_name, clinic_local, clinic_call)
+        values (#{clinicId,jdbcType=INTEGER}, #{clinicType,jdbcType=INTEGER},
+        #{clinicName,jdbcType=VARCHAR},#{clinicLocal,jdbcType=VARCHAR},
+        #{clinicCall,jdbcType=VARCHAR})
+    </insert>
+    <update id="updateClinicById" parameterType="com.whw.springboot.entity.Clinic">
+        update clinic
+        <set>
+            <if test="clinicId != null">
+                clinic_id = #{clinicId,jdbcType=INTEGER},
+            </if>
+            <if test="clinicType != null">
+                clinic_type = #{clinicType,jdbcType=INTEGER},
+            </if>
+            <if test="clinicName != null">
+                clinic_name =  #{clinicName,jdbcType=VARCHAR},
+            </if>
+            <if test="clinicLocal != null">
+                clinic_local = #{clinicLocal,jdbcType=VARCHAR},
+            </if>
+            <if test="clinicCall != null">
+                clinic_call = #{clinicCall,jdbcType=VARCHAR}
+            </if>
+        </set>
+        where clinic_id = #{clinicId,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteClinicById" parameterType="com.whw.springboot.entity.Clinic">
+        delete from clinic
+        <where>
+            <if test="clinicId != null">
+                clinic_id = #{clinicId,jdbcType=INTEGER}
+            </if>
+            <if test="clinicType != null">
+               and clinic_type = #{clinicType,jdbcType=INTEGER}
+            </if>
+            <if test="clinicName != null">
+               and  clinic_name =  #{clinicName,jdbcType=VARCHAR}
+            </if>
+            <if test="clinicLocal != null">
+              and  clinic_local = #{clinicLocal,jdbcType=VARCHAR}
+            </if>
+            <if test="clinicCall != null">
+              and  clinic_call = #{clinicCall,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+    <select id="queryClinicById" parameterType="com.whw.springboot.entity.Clinic" resultMap="BaseResultMap">
+        <include refid="select" />
+        <where>
+            <if test="clinicId != null">
+                clinic_id = #{clinicId,jdbcType=INTEGER}
+            </if>
+            <if test="clinicType != null">
+                and clinic_type = #{clinicType,jdbcType=INTEGER}
+            </if>
+            <if test="clinicName != null">
+                and  clinic_name =  #{clinicName,jdbcType=VARCHAR}
+            </if>
+            <if test="clinicLocal != null">
+                and  clinic_local = #{clinicLocal,jdbcType=VARCHAR}
+            </if>
+            <if test="clinicCall != null">
+                and  clinic_call = #{clinicCall,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

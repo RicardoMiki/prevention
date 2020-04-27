@@ -3,9 +3,11 @@ package com.whw.springboot.controller;
 import java.io.IOException;
 
 
+import com.whw.springboot.entity.Doctor;
 import com.whw.springboot.entity.User;
 import com.whw.springboot.entity.Userinfo;
 import com.whw.springboot.entity.UserNumber;
+import com.whw.springboot.service.DoctorService;
 import com.whw.springboot.service.UserService;
 import com.whw.springboot.utils.OpenId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,18 +38,30 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private DoctorService doctorService;
 	/**
 	 * 注册用户.
 	 */
 	@ApiOperation(value = "注册用户需要学号")
 	@PostMapping(value = "user")
-	public Userinfo insertUser(UserNumber userNumber) {
+	public Boolean insertUser(UserNumber userNumber) {
 		Userinfo userinfo = userService.CheckRegister(userNumber);
-		if (userinfo != null)
+		if (userinfo != null){
 			if (userService.insertUser(userNumber)){
-				return userinfo;
+				return true;
 			}
-		return null;
+		}
+		else {
+			Doctor doctor = doctorService.CheckRegisterDoctor(userNumber);
+			if(doctor != null){
+				userNumber.setUser_doc(1);
+				if(userService.insertUser(userNumber)){
+					return true;
+				}
+			}
+		}
+		return false;
 
 	}
 

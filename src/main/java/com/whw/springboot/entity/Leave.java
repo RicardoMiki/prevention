@@ -71,4 +71,7 @@ public class Leave {
 
     @IgnoreSwaggerParameter
     private Userinfo user;
+
+    @IgnoreSwaggerParameter
+    private Clazz clazz;
 }

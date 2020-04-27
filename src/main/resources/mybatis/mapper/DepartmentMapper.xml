@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whw.springboot.mapper.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Department">
+        <!--@mbg.generated-->
+        <!--@Table department-->
+        <id column="dep_id" jdbcType="INTEGER" property="depId" />
+        <result column="dep_name" jdbcType="VARCHAR" property="depName" />
+        <result column="dep_leader_id" jdbcType="VARCHAR" property="depLeaderId" />
+        <result column="dep_leader_name" jdbcType="VARCHAR" property="depLeaderName" />
+        <result column="dep_leader_phone" jdbcType="VARCHAR" property="depLeaderPhone" />
+        <result column="dep_leader_email" jdbcType="VARCHAR" property="depLeaderEmail" />
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+            <id column="user_id" jdbcType="VARCHAR" property="userId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+
+            <result column="class_id" jdbcType="INTEGER" property="classId" />
+
+            <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+            <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+            <result column="user_type" jdbcType="INTEGER" property="userType" />
+        </association>
+        <collection property="clazzs" ofType="com.whw.springboot.entity.Clazz">
+            <id column="clazz_id" jdbcType="INTEGER" property="clazzId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+            <result column="clazz_teacher_id" jdbcType="VARCHAR" property="clazzTeacherId" />
+            <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
+        </collection>
+    </resultMap>
+
+    <sql id="select">
+  	SELECT
+	*
+FROM
+	department
+
+	LEFT JOIN `user` ON department.dep_leader_id = `user`.user_id
+	LEFT JOIN clazz on department.dep_id=clazz.dep_id
+  </sql>
+
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        dep_id, dep_name, dep_leader_id, dep_leader_name, dep_leader_phone, dep_leader_email
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.DepartmentNumber" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        <include refid="select" />
+        <where>
+            <if test="dep_id !=null">
+                department.dep_id =#{dep_id}
+            </if>
+            <if test="dep_leader_id !=null">
+                and department.dep_leader_id=#{dep_leader_id}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from department
+        where dep_id = #{depId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="dep_id" keyProperty="depId" parameterType="com.whw.springboot.entity.Department" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into department (dep_name, dep_leader_id, dep_leader_name,
+        dep_leader_phone, dep_leader_email)
+        values (#{depName,jdbcType=VARCHAR}, #{depLeaderId,jdbcType=VARCHAR}, #{depLeaderName,jdbcType=VARCHAR},
+        #{depLeaderPhone,jdbcType=VARCHAR}, #{depLeaderEmail,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="dep_id" keyProperty="depId" parameterType="com.whw.springboot.entity.Department" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="depName != null">
+                dep_name,
+            </if>
+            <if test="depLeaderId != null">
+                dep_leader_id,
+            </if>
+            <if test="depLeaderName != null">
+                dep_leader_name,
+            </if>
+            <if test="depLeaderPhone != null">
+                dep_leader_phone,
+            </if>
+            <if test="depLeaderEmail != null">
+                dep_leader_email,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="depName != null">
+                #{depName,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderId != null">
+                #{depLeaderId,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderName != null">
+                #{depLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderPhone != null">
+                #{depLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderEmail != null">
+                #{depLeaderEmail,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.whw.springboot.entity.Department">
+        <!--@mbg.generated-->
+        update department
+        <set>
+            <if test="depName != null">
+                dep_name = #{depName,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderId != null">
+                dep_leader_id = #{depLeaderId,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderName != null">
+                dep_leader_name = #{depLeaderName,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderPhone != null">
+                dep_leader_phone = #{depLeaderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="depLeaderEmail != null">
+                dep_leader_email = #{depLeaderEmail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where dep_id = #{depId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.whw.springboot.entity.Department">
+        <!--@mbg.generated-->
+        update department
+        set dep_name = #{depName,jdbcType=VARCHAR},
+        dep_leader_id = #{depLeaderId,jdbcType=VARCHAR},
+        dep_leader_name = #{depLeaderName,jdbcType=VARCHAR},
+        dep_leader_phone = #{depLeaderPhone,jdbcType=VARCHAR},
+        dep_leader_email = #{depLeaderEmail,jdbcType=VARCHAR}
+        where dep_id = #{depId,jdbcType=INTEGER}
+    </update>
+</mapper>

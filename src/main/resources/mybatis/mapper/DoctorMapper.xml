@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whw.springboot.mapper.DoctorMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Doctor">
+       <id column="doc_id" jdbcType="VARCHAR" property="docId" />
+        <result column="doc_name" jdbcType="VARCHAR" property="docName" />
+        <result column="doc_type" jdbcType="INTEGER" property="docType"/>
+        <result column="doc_clinicid" jdbcType="INTEGER" property="docClinicId" />
+        <result column="doc_phone" jdbcType="VARCHAR" property="docPhone" />
+        <result column="doc_idcard" jdbcType="VARCHAR" property="docIdCard" />
+
+        <association property="clinic" javaType="com.whw.springboot.entity.Clinic">
+            <id column="clinic_id" jdbcType="INTEGER" property="clinicId" />
+            <result column="clinic_type" jdbcType="INTEGER" property="clinicType"/>
+            <result column="clinic_name" jdbcType="VARCHAR" property="clinicName"/>
+            <result column="clinic_local" jdbcType="VARCHAR" property="clinicLocal" />
+            <result column="clinic_call" jdbcType="VARCHAR" property="clinicCall"/>
+        </association>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+       doc_id, doc_name, doc_type, doc_clinicid, doc_phone, doc_idcard
+    </sql>
+    
+    <sql id="select">
+    SELECT
+    *
+    FROM
+    `doctor`
+    LEFT JOIN `clinic` on `doctor`.doc_clinicid=`clinic`.clinic_id
+    </sql>
+    
+    
+    <update id="updataDoctor" parameterType="com.whw.springboot.entity.Doctor">
+        update doctor
+        <set>
+            <if test="docId != null">
+                doc_id = #{docId,jdbcType=VARCHAR},
+            </if>
+            <if test="docName != null">
+                doc_name = #{docName,jdbcType=VARCHAR},
+            </if>
+            <if test="docType != null">
+                doc_type = #{docType,jdbcType=INTEGER},
+            </if>
+            <if test="docClinicId != null">
+                doc_clinicid = #{docClinicId,jdbcType=INTEGER},
+            </if>
+            <if test="docPhone != null">
+                doc_phone = #{docPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="docIdCard != null">
+                doc_idcard = #{docIdCard,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where doc_id = #{docId,jdbcType=VARCHAR}
+    </update>
+    <select id="queryDoctorById" parameterType="com.whw.springboot.entity.Doctor" resultMap="BaseResultMap">
+        <include refid="select" />
+        <where>
+            <if test="docId != null">
+                doc_id = #{docId}
+            </if>
+            <if test="docName != null">
+                and doc_name = #{docName}
+            </if>
+            <if test="docType != null">
+                and doc_type = #{docType}
+            </if>
+            <if test="docClinicId != null">
+                and doc_clinicid = #{docClinicId}
+            </if>
+            <if test="docPhone != null">
+                and doc_phone = #{docPhone}
+            </if>
+            <if test="docIdCard != null">
+                and doc_idcard = #{docIdCard}
+            </if>
+        </where>
+    </select>
+    <select id="CheckRegisterDoctor" parameterType="com.whw.springboot.entity.UserNumber" resultMap="BaseResultMap">
+        select * from doctor where doc_id= #{user_id} and doc_idcard like CONCAT('%',#{user_idcard4})
+    </select>
+</mapper>

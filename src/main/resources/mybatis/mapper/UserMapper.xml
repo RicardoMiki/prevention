@@ -11,7 +11,7 @@
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
 
     <result column="user_idcard4" jdbcType="VARCHAR" property="userIdCard4" />
-
+    <result column="user_doc" jdbcType="INTEGER" property="userDoc"/>
       <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
           <id column="user_id" jdbcType="VARCHAR" property="userId" />
           <result column="dep_id" jdbcType="INTEGER" property="depId" />
@@ -28,7 +28,7 @@
   </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        user_id, user_openid,  user_pwd,  user_idcard4
+        user_id, user_openid,  user_pwd,  user_idcard4, user_doc
     </sql>
 
     <sql id="select">
@@ -41,8 +41,8 @@ FROM
   </sql>
     <insert id="insertUser" parameterType="com.whw.springboot.entity.UserNumber">
         <!--@mbg.generated-->
-        insert into user (user_id, user_openid,user_pwd,user_idcard4)
-        values (#{user_id,jdbcType=VARCHAR},#{user_openid,jdbcType=VARCHAR},#{user_pwd,jdbcType=VARCHAR},#{user_idcard4,jdbcType=VARCHAR})
+        insert into user (user_id, user_openid,user_pwd,user_idcard4,user_doc)
+        values (#{user_id,jdbcType=VARCHAR},#{user_openid,jdbcType=VARCHAR},#{user_pwd,jdbcType=VARCHAR},#{user_idcard4,jdbcType=VARCHAR},#{user_doc,jdbcType=INTEGER})
     </insert>
 
     <select id="CheckUserById" parameterType="com.whw.springboot.entity.UserNumber" resultMap="BaseResultMap">

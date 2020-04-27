@@ -122,5 +122,5 @@ public class Back {
     private String backRefuseReason;
 
     @IgnoreSwaggerParameter
-    private Userinfo user;
+    private Userinfo userinfo;
 }

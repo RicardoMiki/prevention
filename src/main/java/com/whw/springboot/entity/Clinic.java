@@ -13,7 +13,7 @@ public class Clinic {
      * 医务室id
      */
     @ApiModelProperty(value = "医务室id")
-    private int clinicId;
+    private Integer clinicId;
 
     /**
      * 医务室名称
@@ -25,7 +25,7 @@ public class Clinic {
      * 医务室类别 0：心理咨询室 1：医务室
      */
     @ApiModelProperty(value = "医务室类别 0：心理咨询室 1：医务室")
-    private int clinicType;
+    private Integer clinicType;
 
     /**
      * 医务室地址

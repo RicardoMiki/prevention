@@ -1,5 +1,6 @@
 package com.whw.springboot.entity;
 
+import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,4 +33,13 @@ public class User {
      */
     @ApiModelProperty(value = "用户身份证号后四位")
     private String userIdCard4;
+
+    /**
+     * 是否为医生 0不是 1是
+     */
+    @ApiModelProperty(value = "是否为医生 0不是 1是")
+    private Integer userDoc;
+
+    @IgnoreSwaggerParameter
+    private Userinfo userinfo;
 }

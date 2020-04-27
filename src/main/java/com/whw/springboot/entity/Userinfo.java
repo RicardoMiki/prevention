@@ -33,9 +33,6 @@ public class Userinfo {
      */
     @ApiModelProperty(value = "班级id")
     private int classId;
-    @IgnoreSwaggerParameter
-    private Clazz clazz;
-
     /**
      * 宿舍id
      */
@@ -73,5 +70,10 @@ public class Userinfo {
     private String userIdCard;
 
     @IgnoreSwaggerParameter
+    private Clazz clazz123;
+
+    @IgnoreSwaggerParameter
     private List<Love> loves;
+
+
 }

@@ -56,7 +56,7 @@ public class Clock {
     @ApiModelProperty(value = "是否不适  0：适 1：不适")
     private Integer clockState;
     @IgnoreSwaggerParameter
-    private Userinfo user;
+    private Userinfo userinfo;
 
     @IgnoreSwaggerParameter
     private Dormitory dormitory;

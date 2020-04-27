@@ -10,5 +10,6 @@ public class UserNumber {
     private String user_openid;
     private String user_pwd;
     private String user_idcard4;
+    private Integer user_doc;
 
 }

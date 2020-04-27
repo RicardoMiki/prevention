@@ -1,5 +1,6 @@
 package com.whw.springboot.entity;
 
+import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,4 +45,10 @@ public class Department {
      */
     @ApiModelProperty(value="学部主任邮箱")
     private String depLeaderEmail;
+
+    @IgnoreSwaggerParameter
+    private Userinfo userinfo;
+
+    @IgnoreSwaggerParameter
+    private Clazz clazzs;
 }
