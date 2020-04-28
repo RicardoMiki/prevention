@@ -53,7 +53,7 @@ public class OderController {
     public List<Oder> queryAllOrder(Oder oder) throws ParseException {
 
         if (oder.getOrderDateString()!=null){
-            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date2=formatter.parse(oder.getOrderDateString());
             oder.setOrderDate(date2);
         }

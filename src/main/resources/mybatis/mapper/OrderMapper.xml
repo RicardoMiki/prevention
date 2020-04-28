@@ -122,7 +122,7 @@
                 and order_docid = #{orderDocId,jdbcType=VARCHAR}
             </if>
             <if test="orderDate != null">
-                and order_date LIKE CONCAT(#{orderDate},'%')
+                and order_date = #{orderDate,jdbcType=TIMESTAMP}
             </if>
             <if test="orderContent != null">
                 and order_content = #{orderContent,jdbcType=VARCHAR}
