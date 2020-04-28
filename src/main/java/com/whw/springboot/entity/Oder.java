@@ -34,10 +34,18 @@ public class Oder {
     /**
      * 就诊预约时间
      */
-    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
+
     @ApiModelProperty(value = "就诊预约时间")
     private Date orderDate;
 
+    @ApiModelProperty(value="就诊预约时间传入这个就行")
+    private String orderDateString;
+
+    @ApiModelProperty(value="查询五天开始日期")
+    private String orderStartDateString;
+
+    @ApiModelProperty(value="查询五天结束日期")
+    private String orderEndDateString;
     /**
      * 就诊咨询内容预填写
      */

@@ -6,6 +6,7 @@ import com.whw.springboot.service.OderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +21,7 @@ public class OderServiceImpl implements OderService {
     }
 
     @Override
+
     public List<Oder> queryAllOrder(Oder oder) {
         return oderMapper.queryAllOrder(oder);
     }
@@ -32,5 +34,10 @@ public class OderServiceImpl implements OderService {
     @Override
     public Integer updateOrder(Oder oder) {
         return oderMapper.updateOrder(oder);
+    }
+
+    @Override
+    public List<Oder> queryFiveOrder(Date date1, Date date2) {
+        return oderMapper.queryFiveOrder(date1, date2);
     }
 }

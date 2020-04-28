@@ -9,7 +9,7 @@
 
         <result column="order_docid" jdbcType="VARCHAR" property="orderDocId" />
 
-        <result column="order_date" jdbcType="DATE" property="orderDate" />
+        <result column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
         <result column="order_content" jdbcType="VARCHAR" property="orderContent" />
         <result column="order_posttime" jdbcType="DATE" property="orderPostTime" />
         <result column="order_type" jdbcType="VARCHAR" property="orderType" />
@@ -87,7 +87,7 @@
                 #{orderDocId,jdbcType=VARCHAR},
             </if>
             <if test="orderDate != null">
-                #{orderDate,jdbcType=DATE},
+                #{orderDate,jdbcType=TIMESTAMP},
             </if>
             <if test="orderContent != null">
                 #{orderContent,jdbcType=VARCHAR},
@@ -103,37 +103,43 @@
             </if>
         </trim>
     </insert>
-    
+
+    <select id="queryFiveOrder" parameterType="java.util.Date" resultMap="BaseResultMap">
+        <include refid="select" /> where order_date BETWEEN #{date1} AND #{date2}
+
+    </select>
+
     <select id="queryAllOrder" parameterType="com.whw.springboot.entity.Oder" resultMap="BaseResultMap">
         <include refid="select" />
         <where>
             <if test="orderId != null">
-                order_id = #{orderId}
+                order_id = #{orderId,jdbcType=INTEGER}
             </if>
             <if test="orderUserId != null">
-                and order_userid = #{orderUserId}
+                and order_userid = #{orderUserId,jdbcType=VARCHAR}
             </if>
             <if test="orderDocId != null">
-                and order_docid = #{orderDocId}
+                and order_docid = #{orderDocId,jdbcType=VARCHAR}
             </if>
             <if test="orderDate != null">
-                and order_date = #{orderDate}
+                and order_date LIKE CONCAT(#{orderDate},'%')
             </if>
             <if test="orderContent != null">
-                and order_content = #{orderContent}
+                and order_content = #{orderContent,jdbcType=VARCHAR}
             </if>
             <if test="orderPostTime != null">
-                and order_posttime = #{orderPostTime}
+                and order_posttime = #{orderPostTime,jdbcType=DATE}
             </if>
             <if test="orderType != null">
-                and order_type = #{orderType}
+                and order_type = #{orderType,jdbcType=VARCHAR}
             </if>
             <if test="orderStatus != null">
-                and order_status = #{orderStatus}
+                and order_status = #{orderStatus,jdbcType=VARCHAR}
             </if>
         </where>
 
     </select>
+
 
     <delete id="deleteOderById" parameterType="java.lang.Integer">
         <!--@mbg.generated-->
@@ -155,7 +161,7 @@
                  order_docid = #{orderDocId,jdbcType=VARCHAR},
             </if>
             <if test="orderDate != null">
-               order_date = #{orderDate,jdbcType=DATE},
+               order_date = #{orderDate,jdbcType=TIMESTAMP},
             </if>
             <if test="orderContent != null">
               order_content = #{orderContent,jdbcType=VARCHAR},

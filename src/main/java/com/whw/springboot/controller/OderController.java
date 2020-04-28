@@ -7,6 +7,10 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.crypto.Data;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 //设置跨域
@@ -28,7 +32,15 @@ public class OderController {
      */
     @ApiOperation(value = "添加订单(orderid返回值永远为0)")
     @PostMapping(value = "insertOrder")
-    public Oder insertOrder(Oder oder){
+    public Oder insertOrder(Oder oder) throws ParseException {
+        Date date = new Date();
+        oder.setOrderPostTime(date);
+
+        Date date2=null;
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        date2=formatter.parse(oder.getOrderDateString());
+        oder.setOrderDate(date2);
+
         oderService.insertOrder(oder);
         return oder;
     }
@@ -38,8 +50,27 @@ public class OderController {
      */
     @ApiOperation(value = "查看全部订单传入需要的值")
     @GetMapping(value = "queryOrder")
-    public List<Oder> queryAllOrder(Oder oder){
+    public List<Oder> queryAllOrder(Oder oder) throws ParseException {
+
+        if (oder.getOrderDateString()!=null){
+            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+            Date date2=formatter.parse(oder.getOrderDateString());
+            oder.setOrderDate(date2);
+        }
+
         return oderService.queryAllOrder(oder);
+    }
+
+    /**
+     * 查看5天订单订单传入需要的值
+     */
+    @ApiOperation(value = "查看5天订单订单传入需要的值")
+    @GetMapping(value = "FiveQueryOrder")
+    public List<Oder> queryFiveOrder(String starttime,String endtime) throws ParseException {
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date1 = formatter.parse(String.valueOf(starttime));
+        Date date2 = formatter.parse(String.valueOf(endtime));
+        return oderService.queryFiveOrder(date1, date2);
     }
 
     /**

@@ -29,7 +29,7 @@ public class ClockController {
 //		bjSdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
 
         Date date = new Date();
-
+        clock.setClockTime(date);
         return clockService.insertSelective(clock);
     }
     @ApiOperation(value = "删除 传入id")
