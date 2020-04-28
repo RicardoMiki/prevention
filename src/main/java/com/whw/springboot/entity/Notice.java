@@ -40,6 +40,12 @@ public class Notice {
     private String noticeTitle;
 
     /**
+     * 公告副标题
+     */
+    @ApiModelProperty(value = "公告副标题")
+    private String noticeSecTitle;
+
+    /**
      * 公告内容
      */
     @ApiModelProperty(value = "公告内容")

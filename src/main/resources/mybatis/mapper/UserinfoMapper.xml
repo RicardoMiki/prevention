@@ -23,10 +23,69 @@
         user_phone, user_idcard, user_type
     </sql>
 
+    <insert id="insertUserinfo" parameterType="com.whw.springboot.entity.Userinfo" >
+        insert into userinfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="depId != null">
+                dep_id,
+            </if>
+            <if test="classId != null">
+                class_id,
+            </if>
+            <if test="dormitoryId != null">
+                dormitory_id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="userPhone != null">
+                user_phone,
+            </if>
+            <if test="userIdCard != null">
+                user_idcard,
+            </if>
+            <if test="userType != null">
+                user_type,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="depId != null">
+                #{depId,jdbcType=INTEGER},
+            </if>
+            <if test="classId != null">
+                #{classId,jdbcType=INTEGER},
+            </if>
+            <if test="dormitoryId != null">
+                #{dormitoryId,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userPhone != null">
+                #{userPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="userIdCard != null">
+                #{userIdCard,jdbcType=VARCHAR},
+            </if>
+            <if test="userType != null">
+                #{userType,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
 
     <select id="queryUserinfoById" parameterType="string" resultMap="BaseResultMap">
         select * from userinfo where user_id= #{user_id}
+    </select>
 
+    <select id="queryUserinfo" resultMap="BaseResultMap">
+        select * from userinfo
     </select>
 
     <update id="updataUserinfo" parameterType="com.whw.springboot.entity.Userinfo" >

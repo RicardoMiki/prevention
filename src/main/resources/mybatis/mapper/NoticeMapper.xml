@@ -8,6 +8,7 @@
         <result column="user_id" jdbcType="INTEGER" property="userId" />
         <result column="notice_part" jdbcType="VARCHAR" property="noticePart" />
         <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle" />
+        <result column="notice_sectitle" jdbcType="VARCHAR" property="noticeSecTitle" />
         <result column="notice_text" jdbcType="LONGVARCHAR" property="noticeText" />
         <result column="notice_pic" jdbcType="LONGVARCHAR" property="noticePic" />
         <result column="notice_date" jdbcType="DATE" property="noticeDate" />
@@ -28,7 +29,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        notice_id, user_id, notice_part, notice_title, notice_text, notice_pic, notice_date,
+        notice_id, user_id, notice_part, notice_title, notice_sectitle, notice_text, notice_pic, notice_date,
         notice_state
     </sql>
     <sql id="select">
@@ -65,11 +66,12 @@
     </delete>
     <insert id="insert" keyColumn="notice_id" keyProperty="noticeId" parameterType="com.whw.springboot.entity.Notice" useGeneratedKeys="true">
         <!--@mbg.generated-->
-        insert into notice (user_id, notice_part, notice_title,
+        insert into notice (user_id, notice_part, notice_title,notice_sectitle,
         notice_text, notice_pic, notice_date,
         notice_state)
         values (#{userId,jdbcType=INTEGER}, #{noticePart,jdbcType=VARCHAR}, #{noticeTitle,jdbcType=VARCHAR},
-        #{noticeText,jdbcType=LONGVARCHAR}, #{noticePic,jdbcType=LONGVARCHAR}, #{noticeDate,jdbcType=DATE},
+        #{noticeSecTitle,jdbcType=VARCHAR},#{noticeText,jdbcType=LONGVARCHAR}, #{noticePic,jdbcType=LONGVARCHAR},
+        #{noticeDate,jdbcType=DATE},
         #{noticeState,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" keyColumn="notice_id" keyProperty="noticeId" parameterType="com.whw.springboot.entity.Notice" useGeneratedKeys="true">
@@ -84,6 +86,9 @@
             </if>
             <if test="noticeTitle != null">
                 notice_title,
+            </if>
+            <if test="noticeSecTitle != null">
+                notice_sectitle,
             </if>
             <if test="noticeText != null">
                 notice_text,
@@ -107,6 +112,9 @@
             </if>
             <if test="noticeTitle != null">
                 #{noticeTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="noticeSecTitle != null">
+                #{noticeSecTitle,jdbcType=VARCHAR},
             </if>
             <if test="noticeText != null">
                 #{noticeText,jdbcType=LONGVARCHAR},
@@ -135,6 +143,9 @@
             <if test="noticeTitle != null">
                 notice_title = #{noticeTitle,jdbcType=VARCHAR},
             </if>
+            <if test="noticeSecTitle != null">
+                notice_sectitle = #{noticeSecTitle,jdbcType=VARCHAR},
+            </if>
             <if test="noticeText != null">
                 notice_text = #{noticeText,jdbcType=LONGVARCHAR},
             </if>
@@ -156,6 +167,7 @@
         set user_id = #{userId,jdbcType=INTEGER},
         notice_part = #{noticePart,jdbcType=VARCHAR},
         notice_title = #{noticeTitle,jdbcType=VARCHAR},
+        notice_sectitle = #{noticeSecTitle,jdbcType=VARCHAR},
         notice_text = #{noticeText,jdbcType=LONGVARCHAR},
         notice_pic = #{noticePic,jdbcType=LONGVARCHAR},
         notice_date = #{noticeDate,jdbcType=DATE},

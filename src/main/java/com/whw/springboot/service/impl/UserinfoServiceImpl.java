@@ -6,6 +6,8 @@ import com.whw.springboot.service.UserinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserinfoServiceImpl implements UserinfoService {
 
@@ -20,5 +22,15 @@ public class UserinfoServiceImpl implements UserinfoService {
     @Override
     public Userinfo queryUserinfoById(String user_id) {
         return userinfoMapper.queryUserinfoById(user_id);
+    }
+
+    @Override
+    public List<Userinfo> queryUserinfo() {
+        return userinfoMapper.queryUserinfo();
+    }
+
+    @Override
+    public int insertUserinfo(Userinfo userinfo) {
+        return userinfoMapper.insertUserinfo(userinfo);
     }
 }

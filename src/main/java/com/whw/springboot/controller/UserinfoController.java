@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 //设置跨域
 @CrossOrigin(origins = { "http://localhost:8080", "null" })
 //swagger配置
@@ -41,4 +43,23 @@ public class UserinfoController {
         return userinfoService.updataUserinfo(userinfo);
     }
 
+    /**
+     * 查询所有用户
+     */
+    @ApiOperation(value = "查询所有用户")
+    @GetMapping(value = "queryUserinfo")
+    public List<Userinfo> queryUserinfo(){
+        return userinfoService.queryUserinfo();
+    }
+
+    /**
+     * 添加用户信息
+     * @param userinfo
+     * @return
+     */
+    @ApiOperation(value = "添加用户信息")
+    @PostMapping(value = "insertUserinfo")
+    public int insertUserinfo(Userinfo userinfo){
+        return userinfoService.insertUserinfo(userinfo);
+    }
 }

@@ -11,6 +11,7 @@
     <groupId>com.whw</groupId>
     <artifactId>spring-boot-01</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>spring-boot-01</name>
     <description>Demo project for Spring Boot</description>
 
@@ -21,6 +22,14 @@
 
 
     <dependencies>
+
+        <!-- tomcat是外部提供的 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!-- 小辣椒 -->
         <dependency>

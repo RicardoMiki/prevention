@@ -24,7 +24,7 @@ public class Userinfo {
      * 所属学部id
      */
     @ApiModelProperty(value = "所属学部id")
-    private int depId;
+    private Integer depId;
     @IgnoreSwaggerParameter
     private Department department;
 
@@ -32,12 +32,12 @@ public class Userinfo {
      * 班级id
      */
     @ApiModelProperty(value = "班级id")
-    private int classId;
+    private Integer classId;
     /**
      * 宿舍id
      */
     @ApiModelProperty(value = "宿舍id")
-    private int dormitoryId;
+    private Integer dormitoryId;
     @IgnoreSwaggerParameter
     private Dormitory dormitory;
 
@@ -45,7 +45,7 @@ public class Userinfo {
      * 0：学生 1：专业老师  2：辅导员 3：学部主任 4：学管负责人 5：校长 6.管理员
      */
     @ApiModelProperty(value = "0：学生 1：专业老师  2：辅导员 3：学部主任 4：学管负责人 5：校长 6.管理员")
-    private int userType;
+    private Integer userType;
 
 
 
