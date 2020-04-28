@@ -6,7 +6,6 @@
         <!--@Table clock-->
         <id column="clock_id" jdbcType="INTEGER" property="clockId" />
         <result column="user_id" jdbcType="VARCHAR" property="userId" />
-        <result column="card_time_id" jdbcType="INTEGER" property="cardTimeId" />
         <result column="clock_temp" jdbcType="FLOAT" property="clockTemp" />
         <result column="clock_remark" jdbcType="VARCHAR" property="clockRemark" />
         <result column="clock_time" jdbcType="DATE" property="clockTime" />
@@ -53,7 +52,7 @@ FROM
 	clock
 	LEFT JOIN `user` as student on clock.user_id=student.user_id
 	LEFT JOIN clazz on student.class_id = clazz.clazz_id
-	LEFT JOIN card_time on clock.card_time_id=card_time.card_time_id
+
 	LEFT JOIN dormitory on student.dormitory_id = dormitory.dormitory_id
   </sql>
     <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.ClockNumber" resultMap="BaseResultMap">
@@ -98,10 +97,10 @@ FROM
     </delete>
     <insert id="insert" keyColumn="clock_id" keyProperty="clockId" parameterType="com.whw.springboot.entity.Clock" useGeneratedKeys="true">
         <!--@mbg.generated-->
-        insert into clock (user_id, card_time_id, clock_temp,
+        insert into clock (user_id,  clock_temp,
         clock_remark, clock_time, clock_state
         )
-        values (#{userId,jdbcType=VARCHAR}, #{cardTimeId,jdbcType=INTEGER}, #{clockTemp,jdbcType=FLOAT},
+        values (#{userId,jdbcType=VARCHAR},  #{clockTemp,jdbcType=FLOAT},
         #{clockRemark,jdbcType=VARCHAR}, #{clockTime,jdbcType=DATE}, #{clockState,jdbcType=INTEGER}
         )
     </insert>
@@ -112,9 +111,7 @@ FROM
             <if test="userId != null">
                 user_id,
             </if>
-            <if test="cardTimeId != null">
-                card_time_id,
-            </if>
+
             <if test="clockTemp != null">
                 clock_temp,
             </if>
@@ -132,9 +129,7 @@ FROM
             <if test="userId != null">
                 #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="cardTimeId != null">
-                #{cardTimeId,jdbcType=INTEGER},
-            </if>
+
             <if test="clockTemp != null">
                 #{clockTemp,jdbcType=FLOAT},
             </if>
@@ -156,9 +151,7 @@ FROM
             <if test="userId != null">
                 user_id = #{userId,jdbcType=VARCHAR},
             </if>
-            <if test="cardTimeId != null">
-                card_time_id = #{cardTimeId,jdbcType=INTEGER},
-            </if>
+
             <if test="clockTemp != null">
                 clock_temp = #{clockTemp,jdbcType=FLOAT},
             </if>
@@ -178,7 +171,7 @@ FROM
         <!--@mbg.generated-->
         update clock
         set user_id = #{userId,jdbcType=VARCHAR},
-        card_time_id = #{cardTimeId,jdbcType=INTEGER},
+
         clock_temp = #{clockTemp,jdbcType=FLOAT},
         clock_remark = #{clockRemark,jdbcType=VARCHAR},
         clock_time = #{clockTime,jdbcType=DATE},

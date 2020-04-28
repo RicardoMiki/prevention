@@ -28,8 +28,7 @@ public class Clock {
     /**
      * 打卡时间编号
      */
-    @ApiModelProperty(value = "打卡时间编号")
-    private Integer cardTimeId;
+
 
     /**
      * 用户体温
