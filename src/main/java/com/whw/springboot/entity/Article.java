@@ -47,6 +47,11 @@ public class Article {
     private String articleTitle;
 
     /**
+     * 文章副标题
+     */
+    @ApiModelProperty(value = "文章副标题")
+    private String articleSecTitle;
+    /**
      * 文章内容
      */
     @ApiModelProperty(value="文章内容")

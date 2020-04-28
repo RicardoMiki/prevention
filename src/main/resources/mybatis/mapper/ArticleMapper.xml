@@ -10,6 +10,7 @@
 
         <result column="article_scope" jdbcType="VARCHAR" property="articleScope" />
         <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+        <result column="article_sectitle" jdbcType="VARCHAR" property="articleSecTitle" />
         <result column="article_text" jdbcType="LONGVARCHAR" property="articleText" />
         <result column="article_pic" jdbcType="LONGVARCHAR" property="articlePic" />
         <result column="article_like" jdbcType="INTEGER" property="articleLike" />
@@ -40,6 +41,7 @@
 
         <result column="article_scope" jdbcType="VARCHAR" property="articleScope" />
         <result column="article_title" jdbcType="VARCHAR" property="articleTitle" />
+        <result column="article_sectitle" jdbcType="VARCHAR" property="articleSecTitle" />
         <result column="article_text" jdbcType="LONGVARCHAR" property="articleText" />
         <result column="article_pic" jdbcType="LONGVARCHAR" property="articlePic" />
         <result column="article_like" jdbcType="INTEGER" property="articleLike" />
@@ -54,7 +56,7 @@
         <!--@mbg.generated-->
         SELECT
         article.article_id,article_scope, article.article_user_id, article.user_admin_id,
-        article_title, article_text, article_pic,
+        article_title, article_sectitle, article_text, article_pic,
         COUNT(love.love_id) as article_like, article_date, article_type,
         article_state,user.*
 
@@ -130,12 +132,13 @@
     <insert id="insert" keyColumn="article_id" keyProperty="articleId" parameterType="com.whw.springboot.entity.Article" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into article (user_id, user_admin_id, article_scope,
-        article_title, article_text, article_pic,
+        article_title, article_sectitle,article_text, article_pic,
         article_like, article_date, article_type,
         article_state)
         values (#{userId,jdbcType=VARCHAR}, #{userAdminId,jdbcType=VARCHAR}, #{articleScope,jdbcType=VARCHAR},
-        #{articleTitle,jdbcType=VARCHAR}, #{articleText,jdbcType=LONGVARCHAR}, #{articlePic,jdbcType=LONGVARCHAR},
-        #{articleLike,jdbcType=INTEGER}, #{articleDate,jdbcType=DATE}, #{articleType,jdbcType=INTEGER},
+        #{articleTitle,jdbcType=VARCHAR}, #{articleSecTitle,jdbcType=VARCHAR},#{articleText,jdbcType=LONGVARCHAR},
+        #{articlePic,jdbcType=LONGVARCHAR},#{articleLike,jdbcType=INTEGER}, #{articleDate,jdbcType=DATE},
+        #{articleType,jdbcType=INTEGER},
         #{articleState,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" keyColumn="article_id" keyProperty="articleId" parameterType="com.whw.springboot.entity.Article" useGeneratedKeys="true">
@@ -153,6 +156,9 @@
             </if>
             <if test="articleTitle != null">
                 article_title,
+            </if>
+            <if test="articleSecTitle != null">
+                article_sectitle,
             </if>
             <if test="articleText != null">
                 article_text,
@@ -185,6 +191,9 @@
             </if>
             <if test="articleTitle != null">
                 #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleSecTitle != null">
+                #{articleSecTitle,jdbcType=VARCHAR},
             </if>
             <if test="articleText != null">
                 #{articleText,jdbcType=LONGVARCHAR},
@@ -222,6 +231,9 @@
             <if test="articleTitle != null">
                 article_title = #{articleTitle,jdbcType=VARCHAR},
             </if>
+            <if test="articleSecTitle != null">
+                article_sectitle = #{articleSecTitle,jdbcType=VARCHAR},
+            </if>
             <if test="articleText != null">
                 article_text = #{articleText,jdbcType=LONGVARCHAR},
             </if>
@@ -250,6 +262,7 @@
         user_admin_id = #{userAdminId,jdbcType=VARCHAR},
         article_scope = #{articleScope,jdbcType=VARCHAR},
         article_title = #{articleTitle,jdbcType=VARCHAR},
+        article_sectitle = #{articleSecTitle,jdbcType=VARCHAR},
         article_text = #{articleText,jdbcType=LONGVARCHAR},
         article_pic = #{articlePic,jdbcType=LONGVARCHAR},
         article_like = #{articleLike,jdbcType=INTEGER},
