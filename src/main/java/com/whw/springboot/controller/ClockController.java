@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -26,10 +27,9 @@ public class ClockController {
 
 //		SimpleDateFormat bjSdf = new SimpleDateFormat("yyyy-MM-dd");
 //		bjSdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        Date date=new Date();
 
+        Date date = new Date();
 
-        clock.setClockTime(date);
         return clockService.insertSelective(clock);
     }
     @ApiOperation(value = "删除 传入id")

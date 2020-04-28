@@ -49,6 +49,8 @@ public class Clock {
     @ApiModelProperty(value = "打卡日期")
     private Date clockTime;
 
+    @ApiModelProperty(value="打卡时间传入这个就行")
+    private String clockTimeString;
     /**
      * 是否不适  0：适 1：不适
      */
@@ -56,6 +58,9 @@ public class Clock {
     private Integer clockState;
     @IgnoreSwaggerParameter
     private Userinfo userinfo;
+
+    @IgnoreSwaggerParameter
+    private Clazz clazz;
 
     @IgnoreSwaggerParameter
     private Dormitory dormitory;

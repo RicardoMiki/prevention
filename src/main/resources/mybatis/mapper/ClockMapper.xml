@@ -11,6 +11,14 @@
         <result column="clock_time" jdbcType="DATE" property="clockTime" />
         <result column="clock_state" jdbcType="INTEGER" property="clockState" />
 
+        <association property="dormitory" javaType="com.whw.springboot.entity.Dormitory">
+            <id column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="dormitory_build_id" jdbcType="VARCHAR" property="dormitoryBuildId" />
+            <result column="dormitory_house_id" jdbcType="VARCHAR" property="dormitoryHouseId" />
+            <result column="dormitory_manager_name" jdbcType="VARCHAR" property="dormitoryManagerName" />
+            <result column="dormitory_manager_phone" jdbcType="VARCHAR" property="dormitoryManagerPhone" />
+        </association>
+
         <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
             <id column="user_id" jdbcType="VARCHAR" property="userId" />
             <result column="dep_id" jdbcType="INTEGER" property="depId" />
@@ -24,22 +32,13 @@
             <result column="user_type" jdbcType="INTEGER" property="userType" />
 
             <association property="clazz" javaType="com.whw.springboot.entity.Clazz">
-
                 <id column="clazz_id" jdbcType="INTEGER" property="clazzId" />
                 <result column="clazz_teacher_id" jdbcType="VARCHAR" property="clazzTeacherId" />
                 <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
                 <result column="dep_id" jdbcType="INTEGER" property="depId" />
             </association>
         </association>
-
-        <association property="dormitory" javaType="com.whw.springboot.entity.Dormitory">
-            <id column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
-            <result column="dormitory_build_id" jdbcType="VARCHAR" property="dormitoryBuildId" />
-            <result column="dormitory_house_id" jdbcType="VARCHAR" property="dormitoryHouseId" />
-            <result column="dormitory_manager_name" jdbcType="VARCHAR" property="dormitoryManagerName" />
-            <result column="dormitory_manager_phone" jdbcType="VARCHAR" property="dormitoryManagerPhone" />
-        </association>
-    </resultMap>
+</resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         clock_id, user_id, card_time_id, clock_temp, clock_remark, clock_time, clock_state
@@ -50,10 +49,10 @@ SELECT
 	*
 FROM
 	clock
-	LEFT JOIN `user` as student on clock.user_id=student.user_id
-	LEFT JOIN clazz on student.class_id = clazz.clazz_id
+	LEFT JOIN `userinfo`  on clock.user_id=userinfo.user_id
+	LEFT JOIN clazz on userinfo.class_id = clazz.clazz_id
 
-	LEFT JOIN dormitory on student.dormitory_id = dormitory.dormitory_id
+	LEFT JOIN dormitory on userinfo.dormitory_id = dormitory.dormitory_id
   </sql>
     <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.ClockNumber" resultMap="BaseResultMap">
 

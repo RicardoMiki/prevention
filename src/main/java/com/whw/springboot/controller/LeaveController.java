@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,10 +24,15 @@ public class LeaveController {
     private LeaveService leaveService;
     @ApiOperation(value = "添加 所需的")
     @PostMapping(value = "Leave" )
-    public int insertLeave(Leave leave) {
+    public int insertLeave(Leave leave) throws ParseException {
         Date date=new Date();
         leave.setLeavePostDate(date);
-
+        Date date2=null;
+        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+        date2=formatter.parse(leave.getLeaveEndDateString());
+        leave.setLeaveEndDate(date2);
+        date2=formatter.parse(leave.getLeaveStartDateString());
+        leave.setLeaveStartDate(date2);
         return leaveService.insertSelective(leave);
     }
     @ApiOperation(value = "删除 id")

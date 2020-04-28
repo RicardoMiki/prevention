@@ -32,6 +32,7 @@ public class Back {
     @ApiModelProperty(value="返回地(省市区)")
     private String backPlace;
 
+
     /**
      * 交通工具：飞机-》地铁-》公交 自驾
      */
@@ -60,6 +61,8 @@ public class Back {
     @ApiModelProperty(value="返校目标时间")
     private Date backTargetTime;
 
+    @ApiModelProperty(value="返校目标时间传入这个就行")
+    private String backTargetTimeString;
     /**
      * 返回登记/申请 发送时间
      */
