@@ -1,6 +1,7 @@
 package com.whw.springboot.controller;
 
 import com.whw.springboot.entity.Oder;
+import com.whw.springboot.entity.OderTime;
 import com.whw.springboot.service.OderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -66,10 +67,11 @@ public class OderController {
      */
     @ApiOperation(value = "查看5天订单订单传入需要的值")
     @GetMapping(value = "FiveQueryOrder")
-    public List<Oder> queryFiveOrder(String starttime,String endtime) throws ParseException {
+    public List<OderTime> queryFiveOrder(String starttime, String endtime) throws ParseException {
         SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date1 = formatter.parse(String.valueOf(starttime));
         Date date2 = formatter.parse(String.valueOf(endtime));
+
         return oderService.queryFiveOrder(date1, date2);
     }
 

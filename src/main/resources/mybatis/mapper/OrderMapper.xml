@@ -33,7 +33,11 @@
         </association>
 
     </resultMap>
-    
+
+    <resultMap id="OderTimeMap" type="com.whw.springboot.entity.OderTime">
+        <id column="order_date" jdbcType="TIMESTAMP" property="orderDate" />
+        <result column="count(order_date)" jdbcType="INTEGER" property="count" />
+    </resultMap>
     <sql id="Base_Column_List">
         order_id, order_userid, order_docid, order_date, order_content, order_posttime, order_type, order_status
     </sql>
@@ -104,8 +108,10 @@
         </trim>
     </insert>
 
-    <select id="queryFiveOrder" parameterType="java.util.Date" resultMap="BaseResultMap">
-        <include refid="select" /> where order_date BETWEEN #{date1} AND #{date2}
+    <select id="queryFiveOrder" parameterType="java.util.Date" resultMap="OderTimeMap">
+       select  order_date,
+count(order_date)
+from oder where order_date BETWEEN #{param1} AND #{param2} GROUP BY order_date
 
     </select>
 

@@ -1,6 +1,7 @@
 package com.whw.springboot.service.impl;
 
 import com.whw.springboot.entity.Oder;
+import com.whw.springboot.entity.OderTime;
 import com.whw.springboot.mapper.OderMapper;
 import com.whw.springboot.service.OderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class OderServiceImpl implements OderService {
     }
 
     @Override
-    public List<Oder> queryFiveOrder(Date date1, Date date2) {
+    public List<OderTime> queryFiveOrder(Date date1, Date date2) {
         return oderMapper.queryFiveOrder(date1, date2);
     }
 }

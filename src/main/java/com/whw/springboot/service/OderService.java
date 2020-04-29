@@ -1,6 +1,7 @@
 package com.whw.springboot.service;
 
 import com.whw.springboot.entity.Oder;
+import com.whw.springboot.entity.OderTime;
 
 import java.util.Date;
 import java.util.List;
@@ -15,5 +16,5 @@ public interface OderService {
 
     Integer updateOrder(Oder oder);
 
-    List<Oder> queryFiveOrder(Date date1, Date date2);
+    List<OderTime> queryFiveOrder(Date date1, Date date2);
 }

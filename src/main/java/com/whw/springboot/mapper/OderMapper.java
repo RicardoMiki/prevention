@@ -1,6 +1,7 @@
 package com.whw.springboot.mapper;
 
 import com.whw.springboot.entity.Oder;
+import com.whw.springboot.entity.OderTime;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -17,5 +18,5 @@ public interface OderMapper {
 
     Integer updateOrder(Oder oder);
 
-    List<Oder> queryFiveOrder(Date date1, Date date2);
+    List<OderTime> queryFiveOrder(Date date1, Date date2);
 }
