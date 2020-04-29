@@ -17,7 +17,7 @@ import java.util.List;
 
 @CrossOrigin(origins = { "http://localhost:8080", "null" })
 
-//swagger配置
+//swagger配置.
 @Api(description = "Article接口")
 @RestController
 public class ArticleController {
