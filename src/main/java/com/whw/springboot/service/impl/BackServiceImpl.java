@@ -28,10 +28,10 @@ public class BackServiceImpl implements BackService {
     }
 
     @Override
-    public Back insertSelective(Back record) {
+    public int insertSelective(Back record) {
         // TODO Auto-generated method stub
-        backMapper.insertSelective(record);
-        return record;
+
+        return backMapper.insertSelective(record);
     }
 
     @Override

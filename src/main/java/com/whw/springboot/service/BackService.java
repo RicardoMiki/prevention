@@ -10,7 +10,7 @@ public interface BackService {
 
     int insert(Back record);
 
-    Back insertSelective(Back record);
+    int insertSelective(Back record);
 
     List<Back> selectByPrimaryKey(BackNumber backNumber);
 

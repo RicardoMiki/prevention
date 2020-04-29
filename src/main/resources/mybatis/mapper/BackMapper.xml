@@ -34,12 +34,7 @@
             <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
             <result column="user_type" jdbcType="INTEGER" property="userType" />
 
-            <association property="clazz" javaType="com.whw.springboot.entity.Clazz">
-                <id column="clazz_id" jdbcType="INTEGER" property="clazzId" />
-                <result column="dep_id" jdbcType="INTEGER" property="depId" />
-                <result column="clazz_teacher_id" jdbcType="VARCHAR" property="clazzTeacherId" />
-                <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
-            </association>
+
         </association>
     </resultMap>
     <sql id="Base_Column_List">
@@ -50,13 +45,12 @@
     </sql>
     <sql id="select">
   	SELECT
-	back.*,`userinfo`.*,clazz.*
+	back.*,`userinfo`.*
 	FROM
 	back
 	LEFT JOIN `userinfo`
 	ON back.user_id=`userinfo`.user_id
-	LEFT JOIN clazz
-	on clazz.clazz_id=`userinfo`.class_id
+
   </sql>
     <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.BackNumber" resultMap="BaseResultMap">
         <!--@mbg.generated-->
@@ -75,9 +69,7 @@
             <if test="back_type !=null">
                 and back.back_type=#{back_type}
             </if>
-            <if test="clazz_teacher_id !=null">
-                and clazz_teacher_id=#{clazz_teacher_id}
-            </if>
+
         </where>
 
     </select>
