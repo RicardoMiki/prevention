@@ -51,14 +51,15 @@ public class OderServiceImpl implements OderService {
 
             List<OderTime> list1 =new ArrayList<OderTime>();
 
-            for (int i=8;i <= 13; i++) {
+            for (int i=8;i <= 20; i++) {
                 date.setHours(i);
                 System.out.println("data:"+date);
                 System.out.println("hours"+date.getHours());
                 OderTime queryFiveOrder = oderMapper.queryFiveOrder(date);
                 if (queryFiveOrder==null) {
+                    Date date2 = (Date) date.clone();
                     OderTime oderTime = new OderTime();
-                    oderTime.setOrderDate(date);
+                    oderTime.setOrderDate(date2);
                     list1.add(oderTime);
                 }else {
                     list1.add(queryFiveOrder);
