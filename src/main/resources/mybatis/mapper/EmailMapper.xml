@@ -57,4 +57,16 @@
             </where>
 
     </select>
+    <select id="queryEmail" resultType="com.whw.springboot.entity.Email" resultMap="BaseResultMap">
+        <include refid="select" />
+        <where>
+            <if test="emailId != null">
+                email_id = #{emailId,jdbcType=INTEGER}
+            </if>
+            <if test="emailName != null">
+                and email_name = #{emailName,jdbcType=VARCHAR}
+            </if>
+        </where>
+
+    </select>
 </mapper>

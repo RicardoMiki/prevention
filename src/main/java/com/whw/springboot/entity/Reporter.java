@@ -51,6 +51,11 @@ public class Reporter {
     private Integer reporterEmailId;
 
     /**
+     * 上报图片
+     */
+    @ApiModelProperty(value = "上报图片")
+    private String reporterPic;
+    /**
      *回复内容
      */
     @ApiModelProperty(value = "回复内容")

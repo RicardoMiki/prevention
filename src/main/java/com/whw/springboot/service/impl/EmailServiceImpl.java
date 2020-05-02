@@ -18,8 +18,6 @@ public class EmailServiceImpl implements EmailService {
         return emailMapper.insertEmail(email);
     }
 
-
-
     @Override
     public List<Email> queryEmailById(Email email) {
         return emailMapper.queryEmailById(email);
@@ -33,5 +31,10 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public int updateEmailById(Email email) {
         return emailMapper.updateEmailById(email);
+    }
+
+    @Override
+    public Email queryEmail(Email email) {
+        return emailMapper.queryEmail(email);
     }
 }

@@ -14,4 +14,6 @@ public interface EmailMapper {
     int deleteEmailById(Email email);
 
     int updateEmailById(Email email);
+
+    Email queryEmail(Email email);
 }

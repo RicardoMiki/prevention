@@ -2,11 +2,12 @@ package com.whw.springboot.service;
 
 import com.whw.springboot.entity.Reporter;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 public interface ReporterService {
 
-    Boolean insertReporter(Reporter reporter);
+    Boolean insertReporter(Reporter reporter) throws MessagingException;
 
     List<Reporter> queryAllReporter(Reporter reporter);
 

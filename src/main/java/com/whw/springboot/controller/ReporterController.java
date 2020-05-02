@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 
@@ -28,7 +29,7 @@ public class ReporterController {
      */
     @ApiOperation(value = "添加上报(reporterid返回值永远为0)")
     @PostMapping(value = "insertReporter")
-    public Reporter insertReporter(Reporter reporter){
+    public Reporter insertReporter(Reporter reporter) throws MessagingException {
         reporterService.insertReporter(reporter);
         return reporter;
     }
@@ -39,6 +40,7 @@ public class ReporterController {
     @ApiOperation(value = "查看全部上报传入需要的值")
     @GetMapping(value = "queryReporter")
     public List<Reporter> queryAllReporter(Reporter reporter){
+
         return reporterService.queryAllReporter(reporter);
     }
 

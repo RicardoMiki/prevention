@@ -108,10 +108,10 @@
         </trim>
     </insert>
 
-    <select id="queryFiveOrder" parameterType="java.util.Date" resultMap="OderTimeMap">
+    <select id="queryFiveOrder"  resultMap="OderTimeMap">
        select  order_date,
 count(order_date)
-from oder where order_date =#{date1} GROUP BY order_date
+from oder where order_date =#{date} and order_type = #{orderType}   GROUP BY order_date
 
     </select>
 

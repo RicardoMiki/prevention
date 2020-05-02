@@ -41,7 +41,7 @@ public class OderServiceImpl implements OderService {
     }
 
     @Override
-    public List<List<OderTime>> queryFiveOrder(Date date) {
+    public List<List<OderTime>> queryFiveOrder(Date date,String orderType) {
 
         List<List<OderTime>> lists =new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class OderServiceImpl implements OderService {
                 date.setHours(i);
                 System.out.println("data:"+date);
                 System.out.println("hours"+date.getHours());
-                OderTime queryFiveOrder = oderMapper.queryFiveOrder(date);
+                OderTime queryFiveOrder = oderMapper.queryFiveOrder(date,orderType);
                 if (queryFiveOrder==null) {
                     Date date2 = (Date) date.clone();
                     OderTime oderTime = new OderTime();

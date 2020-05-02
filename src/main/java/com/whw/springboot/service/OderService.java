@@ -16,5 +16,5 @@ public interface OderService {
 
     Integer updateOrder(Oder oder);
 
-    List<List<OderTime>> queryFiveOrder(Date date);
+    List<List<OderTime>> queryFiveOrder(Date date, String orderType);
 }
