@@ -18,5 +18,6 @@ public interface OderMapper {
 
     Integer updateOrder(Oder oder);
 
-    List<OderTime> queryFiveOrder(Date date1, Date date2);
+
+    OderTime queryFiveOrder(Date date);
 }

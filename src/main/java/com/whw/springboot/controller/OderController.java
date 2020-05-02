@@ -67,12 +67,11 @@ public class OderController {
      */
     @ApiOperation(value = "查看5天订单订单传入需要的值")
     @GetMapping(value = "FiveQueryOrder")
-    public List<OderTime> queryFiveOrder(String starttime, String endtime) throws ParseException {
+    public List<List<OderTime>> queryFiveOrder(String starttime) throws ParseException {
         SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date1 = formatter.parse(String.valueOf(starttime));
-        Date date2 = formatter.parse(String.valueOf(endtime));
+        Date date = formatter.parse(String.valueOf(starttime));
 
-        return oderService.queryFiveOrder(date1, date2);
+        return oderService.queryFiveOrder(date);
     }
 
     /**

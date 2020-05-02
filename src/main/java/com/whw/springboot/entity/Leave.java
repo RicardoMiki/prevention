@@ -59,6 +59,9 @@ public class Leave {
     @ApiModelProperty(value = "请假结束日期")
     private Date leaveEndDate;
 
+    @ApiModelProperty(value = "请假时长")
+    private Integer leaveDuration;
+
     @ApiModelProperty(value = "请假结束日期 时间传这个")
     private String leaveEndDateString;
     /**
@@ -74,7 +77,7 @@ public class Leave {
     private Integer leaveState;
 
     @IgnoreSwaggerParameter
-    private Userinfo user;
+    private Userinfo userinfo;
 
     @IgnoreSwaggerParameter
     private Clazz clazz;

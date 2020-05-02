@@ -21,4 +21,6 @@ public class LeaveNumber {
     private String clazz_teacher_id;
     @ApiModelProperty(value="日期")
     private String date;
+    @ApiModelProperty(value = "请假时长")
+    private Integer leave_duration;
 }

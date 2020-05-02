@@ -12,8 +12,9 @@
         <result column="leave_start_date" jdbcType="DATE" property="leaveStartDate" />
         <result column="leave_end_date" jdbcType="DATE" property="leaveEndDate" />
         <result column="leave_post_date" jdbcType="TIMESTAMP" property="leavePostDate" />
+        <result column="leave_duration" jdbcType="INTEGER" property="leaveDuration" />
         <result column="leave_state" jdbcType="INTEGER" property="leaveState" />
-        <association property="user" javaType="com.whw.springboot.entity.Userinfo">
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
             <id column="user_id" jdbcType="VARCHAR" property="userId" />
             <result column="dep_id" jdbcType="INTEGER" property="depId" />
 
@@ -35,7 +36,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        leave_id, user_id, leave_text, leave_pic, leave_type, leave_start_date, leave_end_date,
+        leave_id, user_id, leave_text, leave_pic, leave_type, leave_start_date, leave_end_date,leave_duration,
         leave_post_date, leave_state
     </sql>
 
@@ -45,8 +46,8 @@
 	*
 FROM
 	`leave`
-	LEFT JOIN `user` on `leave`.user_id=`user`.user_id
-	LEFT JOIN clazz on `user`.class_id=clazz.clazz_id
+	LEFT JOIN `userinfo` on `leave`.user_id=`userinfo`.user_id
+	LEFT JOIN clazz on `userinfo`.class_id=clazz.clazz_id
 
   </sql>
 
@@ -87,10 +88,10 @@ FROM
     <insert id="insert" keyColumn="leave_id" keyProperty="leaveId" parameterType="com.whw.springboot.entity.Leave" useGeneratedKeys="true">
         <!--@mbg.generated-->
         insert into `leave` (user_id, leave_text, leave_pic,
-        leave_type, leave_start_date, leave_end_date,
+        leave_type, leave_start_date, leave_end_date,leave_duration,
         leave_post_date, leave_state)
         values (#{userId,jdbcType=INTEGER}, #{leaveText,jdbcType=VARCHAR}, #{leavePic,jdbcType=LONGVARCHAR},
-        #{leaveType,jdbcType=INTEGER}, #{leaveStartDate,jdbcType=DATE}, #{leaveEndDate,jdbcType=DATE},
+        #{leaveType,jdbcType=INTEGER}, #{leaveStartDate,jdbcType=DATE}, #{leaveEndDate,jdbcType=DATE},#{leaveDuration,jdbcType=INTEGER},
         #{leavePostDate,jdbcType=TIMESTAMP}, #{leaveState,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" keyColumn="leave_id" keyProperty="leaveId" parameterType="com.whw.springboot.entity.Leave" useGeneratedKeys="true">
@@ -114,6 +115,9 @@ FROM
             </if>
             <if test="leaveEndDate != null">
                 leave_end_date,
+            </if>
+            <if test="leaveDuration != null">
+                leave_duration,
             </if>
             <if test="leavePostDate != null">
                 leave_post_date,
@@ -140,6 +144,9 @@ FROM
             </if>
             <if test="leaveEndDate != null">
                 #{leaveEndDate,jdbcType=DATE},
+            </if>
+            <if test="leaveDuration != null">
+                #{leaveDuration,jdbcType=INTEGER},
             </if>
             <if test="leavePostDate != null">
                 #{leavePostDate,jdbcType=TIMESTAMP},
@@ -171,6 +178,9 @@ FROM
             <if test="leaveEndDate != null">
                 leave_end_date = #{leaveEndDate,jdbcType=DATE},
             </if>
+            <if test="leaveDuration != null">
+                leave_duration = #{leaveDuration,jdbcType=INTEGER},
+            </if>
             <if test="leavePostDate != null">
                 leave_post_date = #{leavePostDate,jdbcType=TIMESTAMP},
             </if>
@@ -189,6 +199,7 @@ FROM
         leave_type = #{leaveType,jdbcType=INTEGER},
         leave_start_date = #{leaveStartDate,jdbcType=DATE},
         leave_end_date = #{leaveEndDate,jdbcType=DATE},
+        leave_duration = #{leaveDuration,jdbcType=INTEGER},
         leave_post_date = #{leavePostDate,jdbcType=TIMESTAMP},
         leave_state = #{leaveState,jdbcType=INTEGER}
         where leave_id = #{leaveId,jdbcType=INTEGER}

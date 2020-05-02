@@ -111,7 +111,7 @@
     <select id="queryFiveOrder" parameterType="java.util.Date" resultMap="OderTimeMap">
        select  order_date,
 count(order_date)
-from oder where order_date BETWEEN #{param1} AND #{param2} GROUP BY order_date
+from oder where order_date =#{date1} GROUP BY order_date
 
     </select>
 

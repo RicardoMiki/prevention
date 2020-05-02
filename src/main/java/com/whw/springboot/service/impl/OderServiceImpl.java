@@ -7,7 +7,10 @@ import com.whw.springboot.service.OderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 @Service
@@ -38,7 +41,40 @@ public class OderServiceImpl implements OderService {
     }
 
     @Override
-    public List<OderTime> queryFiveOrder(Date date1, Date date2) {
-        return oderMapper.queryFiveOrder(date1, date2);
+    public List<List<OderTime>> queryFiveOrder(Date date) {
+
+        List<List<OderTime>> lists =new ArrayList<>();
+
+        for (int k = 0; k < 7; k++) {
+
+
+
+            List<OderTime> list1 =new ArrayList<OderTime>();
+
+            for (int i=8;i <= 13; i++) {
+                date.setHours(i);
+                System.out.println("data:"+date);
+                System.out.println("hours"+date.getHours());
+                OderTime queryFiveOrder = oderMapper.queryFiveOrder(date);
+                if (queryFiveOrder==null) {
+                    OderTime oderTime = new OderTime();
+                    oderTime.setOrderDate(date);
+                    list1.add(oderTime);
+                }else {
+                    list1.add(queryFiveOrder);
+                }
+
+
+            }
+
+            lists.add(list1);
+            Calendar   calendar = new GregorianCalendar();
+            calendar.setTime(date);
+            calendar.add(calendar.DATE,1); //把日期往后增加一天,整数  往后推,负数往前移动
+            date=calendar.getTime(); //这个时间就是日期往后推一天的结果
+        }
+
+
+        return lists;
     }
 }

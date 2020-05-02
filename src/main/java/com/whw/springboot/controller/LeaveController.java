@@ -23,7 +23,7 @@ public class LeaveController {
     @Autowired
     private LeaveService leaveService;
     @ApiOperation(value = "添加 所需的")
-    @PostMapping(value = "Leave" )
+    @PostMapping(value = "insertLeave" )
     public int insertLeave(Leave leave) throws ParseException {
         Date date=new Date();
         leave.setLeavePostDate(date);
@@ -36,12 +36,12 @@ public class LeaveController {
         return leaveService.insertSelective(leave);
     }
     @ApiOperation(value = "删除 id")
-    @DeleteMapping(value = "Leave/{Leave_id}")
+    @DeleteMapping(value = "deleteLeave/{Leave_id}")
     public int deleteLeave(@PathVariable("Leave_id") Integer Leave_id) {
         return leaveService.deleteByPrimaryKey(Leave_id);
     }
     @ApiOperation(value = "修改 所需属性")
-    @PutMapping(value = "Leave")
+    @PutMapping(value = "updateLeave")
     public int updataLeave(Leave leave) {
         return leaveService.updateByPrimaryKeySelective(leave);
     }
