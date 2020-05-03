@@ -29,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin(origins = { "http://localhost:8080", "null" })
 //swagger配置
 @Api(description = "User接口")
-//接口返回json数据，声明该类是Controller
+//接口返回json数据，声明该类是Controller.
 @RestController
 public class UserController {
 
