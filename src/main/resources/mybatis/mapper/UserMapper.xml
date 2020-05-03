@@ -54,8 +54,8 @@ FROM
             <if test=" user_openid != null">
                 and `user`.user_openid=#{user_openid}
             </if>
-            <if test=" user_user_pwd != null">
-                and `user`.user_pwd=#{user_user_pwd}
+            <if test=" user_pwd != null">
+                and `user`.user_pwd=#{user_pwd}
             </if>
         </where>
     </select>
