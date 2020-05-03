@@ -14,6 +14,27 @@
         <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
         <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
         <result column="user_type" jdbcType="INTEGER" property="userType" />
+        <association property="clazz" javaType="com.whw.springboot.entity.Clazz">
+            <id column="clazz_id" jdbcType="INTEGER" property="clazzId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+            <result column="clazz_teacher_id" jdbcType="VARCHAR" property="clazzTeacherId" />
+            <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
+        </association>
+        <association property="department" javaType="com.whw.springboot.entity.Department">
+            <id column="dep_id" jdbcType="INTEGER" property="depId" />
+            <result column="dep_name" jdbcType="VARCHAR" property="depName" />
+            <result column="dep_leader_id" jdbcType="VARCHAR" property="depLeaderId" />
+            <result column="dep_leader_name" jdbcType="VARCHAR" property="depLeaderName" />
+            <result column="dep_leader_phone" jdbcType="VARCHAR" property="depLeaderPhone" />
+            <result column="dep_leader_email" jdbcType="VARCHAR" property="depLeaderEmail" />
+        </association>
+        <association property="dormitory" javaType="com.whw.springboot.entity.Dormitory">
+            <id column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="dormitory_build_id" jdbcType="VARCHAR" property="dormitoryBuildId" />
+            <result column="dormitory_house_id" jdbcType="VARCHAR" property="dormitoryHouseId" />
+            <result column="dormitory_manager_name" jdbcType="VARCHAR" property="dormitoryManagerName" />
+            <result column="dormitory_manager_phone" jdbcType="VARCHAR" property="dormitoryManagerPhone" />
+        </association>
 
     </resultMap>
 
@@ -22,6 +43,17 @@
         user_id, dep_id, class_id, dormitory_id, user_name,
         user_phone, user_idcard, user_type
     </sql>
+
+    <sql id="select">
+
+  	SELECT
+	*
+FROM
+	`userinfo`
+	LEFT JOIN `department` on `userinfo`.dep_id=`department`.dep_id
+	LEFT JOIN clazz on `userinfo`.class_id=clazz.clazz_id
+    LEFT JOIN `dormitory` on `userinfo`.dormitory_id=`dormitory`.dormitory_id
+  </sql>
 
     <insert id="insertUserinfo" parameterType="com.whw.springboot.entity.Userinfo" >
         insert into userinfo
@@ -81,11 +113,12 @@
 
 
     <select id="queryUserinfoById" parameterType="string" resultMap="BaseResultMap">
-        select * from userinfo where user_id= #{user_id}
+        <include refid="select" />
+         where user_id= #{user_id}
     </select>
 
     <select id="queryUserinfo" resultMap="BaseResultMap">
-        select * from userinfo
+        <include refid="select" />
     </select>
 
     <update id="updataUserinfo" parameterType="com.whw.springboot.entity.Userinfo" >
@@ -118,6 +151,7 @@
     </update>
 
     <select id="CheckRegister" parameterType="com.whw.springboot.entity.UserNumber" resultMap="BaseResultMap">
-        select * from userinfo where user_id= #{user_id} and user_idcard like CONCAT('%',#{user_idcard4})
+        <include refid="select" />
+        where user_id= #{user_id} and user_idcard like CONCAT('%',#{user_idcard4})
      </select>
 </mapper>

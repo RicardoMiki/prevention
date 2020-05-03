@@ -41,6 +41,7 @@ public class Userinfo {
      */
     @ApiModelProperty(value = "宿舍id")
     private Integer dormitoryId;
+
     @IgnoreSwaggerParameter
     private Dormitory dormitory;
 

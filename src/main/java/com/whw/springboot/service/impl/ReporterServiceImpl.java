@@ -34,7 +34,7 @@ public class ReporterServiceImpl implements ReporterService {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
         Email email = new Email();
         email.setEmailId(reporter.getReporterEmailId());
         Email email1 =  emailMapper.queryEmail(email);
