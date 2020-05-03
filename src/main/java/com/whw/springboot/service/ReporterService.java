@@ -11,7 +11,7 @@ public interface ReporterService {
 
     List<Reporter> queryAllReporter(Reporter reporter);
 
-
+    public void sendAttachmentsMail(Reporter reporter);
 
     int deleteById(Integer reporterId);
 

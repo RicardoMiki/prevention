@@ -2,12 +2,16 @@ package com.whw.springboot.controller;
 
 import com.whw.springboot.entity.Reporter;
 import com.whw.springboot.service.ReporterService;
+import com.whw.springboot.utils.LoadUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -30,6 +34,7 @@ public class ReporterController {
     @ApiOperation(value = "添加上报(reporterid返回值永远为0)")
     @PostMapping(value = "insertReporter")
     public Reporter insertReporter(Reporter reporter) throws MessagingException {
+        reporterService.sendAttachmentsMail(reporter);
         reporterService.insertReporter(reporter);
         return reporter;
     }
@@ -62,6 +67,12 @@ public class ReporterController {
         return reporterService.updataReporter(reporter);
     }
 
+    @ApiOperation(value="上传图片")
+    @PostMapping(value="ReporterImages" , headers = "content-type=multipart/form-data")
+    public String getImages(@RequestParam(value = "file") MultipartFile files,
+                            RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        return LoadUtil.upload(files, request);
 
+    }
 
 }

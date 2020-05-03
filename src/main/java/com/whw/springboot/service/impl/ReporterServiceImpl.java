@@ -30,52 +30,55 @@ public class ReporterServiceImpl implements ReporterService {
 
     @Override
     public Boolean insertReporter(Reporter reporter) throws MessagingException {
-
-
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
-
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage,true);
-        Email email = new Email();
-        email.setEmailId(reporter.getReporterEmailId());
-        Email email1 =  emailMapper.queryEmail(email);
-        helper.setFrom("1243563796@qq.com");
-        helper.setTo(email1.getEmailName());
-        helper.setSubject(reporter.getReporterTitle());
-        helper.setText(reporter.getReporterText());
-
-
-        if(reporter.getReporterPic()!=null){
-            String []img = reporter.getReporterPic().split(";");
-            int len = img.length;
-            System.out.println(len);
-            System.out.println(img[0]);
-            FileSystemResource fileSystemResource = new FileSystemResource(new File(img[0]));
-            if(len>1)
-            {
-                for (int i=1;i<len;i++)
-                {
-                    System.out.println(img[i]);
-                    helper.addAttachment(String.valueOf(img[i]),fileSystemResource);
-                }
-            }
-
-        }
-        mailSender.send(mimeMessage);
-
-
-
-
-        return reporterMapper.insertReporter(reporter);
-
-
-
-
+            return reporterMapper.insertReporter(reporter);
     }
 
     @Override
     public List<Reporter> queryAllReporter(Reporter reporter) {
         return reporterMapper.queryAllReporter(reporter);
     }
+
+    @Override
+    public void sendAttachmentsMail(Reporter reporter) {
+        MimeMessage message=mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper=new MimeMessageHelper(message,true);
+            Email email = new Email();
+            email.setEmailId(reporter.getReporterEmailId());
+            Email email1 =  emailMapper.queryEmail(email);
+            helper.setFrom("1243563796@qq.com");
+            helper.setTo(email1.getEmailName());
+            helper.setSubject(reporter.getReporterTitle());
+            helper.setText(reporter.getReporterText());
+            //String filePath = reporter.getReporterPic();
+            String []img = reporter.getReporterPic().split(";");
+            if (null != img)
+            {
+                //传单张图片
+                // file=new FileSystemResource(new File(filePath));
+                //String fileName=filePath.substring(filePath.lastIndexOf(File.separator));
+                //System.out.println(fileName);
+                //helper.addAttachment(fileName,file);
+                FileSystemResource file = null;
+                for (int i = 0; i < img.length;i++)
+                {
+                    file = new FileSystemResource(img[i]);
+                    helper.addAttachment(img[i].substring(img[i].lastIndexOf(File.separator)),file);
+                }
+            }
+
+
+            mailSender.send(message);
+            System.out.println("带附件的邮件发送成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("发送带附件的邮件失败");
+        }
+
+
+
+    }
+
 
 
 
