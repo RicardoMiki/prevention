@@ -50,22 +50,25 @@ public class ReporterServiceImpl implements ReporterService {
             helper.setTo(email1.getEmailName());
             helper.setSubject(reporter.getReporterTitle());
             helper.setText(reporter.getReporterText());
-            //String filePath = reporter.getReporterPic();
-            String []img = reporter.getReporterPic().split(";");
-            if (null != img)
-            {
-                //传单张图片
-                // file=new FileSystemResource(new File(filePath));
-                //String fileName=filePath.substring(filePath.lastIndexOf(File.separator));
-                //System.out.println(fileName);
-                //helper.addAttachment(fileName,file);
-                FileSystemResource file = null;
-                for (int i = 0; i < img.length;i++)
+            //String filePath =
+            if(null != reporter.getReporterPic()){
+                String []img = reporter.getReporterPic().split(";");
+                if (null != img)
                 {
-                    file = new FileSystemResource(img[i]);
-                    helper.addAttachment(img[i].substring(img[i].lastIndexOf(File.separator)),file);
+                    //传单张图片
+                    // file=new FileSystemResource(new File(filePath));
+                    //String fileName=filePath.substring(filePath.lastIndexOf(File.separator));
+                    //System.out.println(fileName);
+                    //helper.addAttachment(fileName,file);
+                    FileSystemResource file = null;
+                    for (int i = 0; i < img.length;i++)
+                    {
+                        file = new FileSystemResource(img[i]);
+                        helper.addAttachment(img[i].substring(img[i].lastIndexOf(File.separator)),file);
+                    }
                 }
             }
+
 
 
             mailSender.send(message);
