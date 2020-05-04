@@ -6,7 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whw.springboot.entity.OpenIdJson;
 import com.whw.springboot.entity.SendJosn;
 import com.whw.springboot.entity.TokenJson;
-import lombok.Value;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
