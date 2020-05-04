@@ -3,6 +3,7 @@ package com.whw.springboot.controller;
 import com.whw.springboot.entity.Reporter;
 import com.whw.springboot.service.ReporterService;
 import com.whw.springboot.utils.LoadUtil;
+import com.whw.springboot.utils.LoadUtilReporter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +72,7 @@ public class ReporterController {
     @PostMapping(value="ReporterImages" , headers = "content-type=multipart/form-data")
     public String getImages(@RequestParam(value = "file") MultipartFile files,
                             RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        return LoadUtil.upload(files, request);
+        return LoadUtilReporter.upload(files, request);
 
     }
 

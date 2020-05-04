@@ -10,5 +10,8 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
 
+appID: ENC(IP/z4u6oi7IjZyZoW9+r5csd/rW8CoAlE6KmhMGz0opPzUUYckIVdcOcrG/zZQHDT2c1S3qXXnPMLEvAMtcHxw==)
+appSecret: ENC(2mhbzDh934vl3ptfy5JG3Q2x/iDqtHPss6+m3p/fz6qpV+DzhhWoBpzylnYtaTRttBmpUB5/RAnOs/UXWdE3IKCevCAAdSgh9j0nnnoZHmY=)
+
 
 

@@ -13,20 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.UUID;
-
-public class LoadUtil {
+public class LoadUtilReporter {
     private static final Logger logger = LoggerFactory.getLogger(LoadUtil.class);
 
     // 项目根路径下的目录 -- SpringBoot static 目录相当于是根路径下（SpringBoot 默认）
@@ -60,8 +47,7 @@ public class LoadUtil {
             File newFile = new File(file.getAbsolutePath() + File.separator + newName);
             // 转存文件到指定路径，如果文件名重复的话，将会覆盖掉之前的文件,这里是把文件上传到 “绝对路径”
             uploadFile.transferTo(newFile);
-            String filePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-                    + "/uploadFile/"  + newName;
+            String filePath ="\\imgs\\"  + newName;
             logger.info("-----------【" + filePath + "】-----------");
             return filePath;
         } catch (Exception e) {
@@ -71,5 +57,4 @@ public class LoadUtil {
     }
 
 }
-
 

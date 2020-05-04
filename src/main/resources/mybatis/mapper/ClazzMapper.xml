@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.ClazzMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Clazz">
+        <!--@mbg.generated-->
+        <!--@Table clazz-->
+        <id column="clazz_id" jdbcType="INTEGER" property="clazzId" />
+        <result column="dep_id" jdbcType="INTEGER" property="depId" />
+        <result column="clazz_teacher_id" jdbcType="VARCHAR" property="clazzTeacherId" />
+        <result column="clazz_name" jdbcType="VARCHAR" property="clazzName" />
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+            <id column="user_id" jdbcType="VARCHAR" property="userId" />
+            <result column="dep_id" jdbcType="INTEGER" property="depId" />
+
+            <result column="class_id" jdbcType="INTEGER" property="classId" />
+
+            <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+            <result column="user_name" jdbcType="VARCHAR" property="userName" />
+            <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+            <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+            <result column="user_type" jdbcType="INTEGER" property="userType" />
+        </association>
+        <association property="department" javaType="com.whw.springboot.entity.Department">
+            <id column="dep_id" jdbcType="INTEGER" property="depId" />
+            <result column="dep_name" jdbcType="VARCHAR" property="depName" />
+            <result column="dep_leader_id" jdbcType="VARCHAR" property="depLeaderId" />
+            <result column="dep_leader_name" jdbcType="VARCHAR" property="depLeaderName" />
+            <result column="dep_leader_phone" jdbcType="VARCHAR" property="depLeaderPhone" />
+            <result column="dep_leader_email" jdbcType="VARCHAR" property="depLeaderEmail" />
+        </association>
+    </resultMap>
+    <sql id="select">
+  	SELECT
+	*
+FROM
+	clazz
+	LEFT JOIN department ON clazz.dep_id = department.dep_id
+	LEFT JOIN `userinfo` ON clazz.clazz_teacher_id = `userinfo`.user_id
+  </sql>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        clazz_id, dep_id, clazz_teacher_id, clazz_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.ClazzNumber" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+
+        <include refid="select" />
+        <where>
+            <if test="clazz_id !=null">
+                clazz.clazz_id=#{clazz_id}
+            </if>
+            <if test="dep_id != null">
+                and clazz.dep_id=#{dep_id}
+            </if>
+            <if test="clazz_teacher_id !=null">
+                and clazz.clazz_teacher_id=#{clazz_teacher_id}
+            </if>
+        </where>
+
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from clazz
+        where clazz_id = #{clazzId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="clazz_id" keyProperty="clazzId" parameterType="com.whw.springboot.entity.Clazz" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into clazz (dep_id, clazz_teacher_id, clazz_name
+        )
+        values (#{depId,jdbcType=INTEGER}, #{clazzTeacherId,jdbcType=INTEGER}, #{clazzName,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" keyColumn="clazz_id" keyProperty="clazzId" parameterType="com.whw.springboot.entity.Clazz" useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into clazz
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="depId != null">
+                dep_id,
+            </if>
+            <if test="clazzTeacherId != null">
+                clazz_teacher_id,
+            </if>
+            <if test="clazzName != null">
+                clazz_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="depId != null">
+                #{depId,jdbcType=INTEGER},
+            </if>
+            <if test="clazzTeacherId != null">
+                #{clazzTeacherId,jdbcType=INTEGER},
+            </if>
+            <if test="clazzName != null">
+                #{clazzName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.whw.springboot.entity.Clazz">
+        <!--@mbg.generated-->
+        update clazz
+        <set>
+            <if test="depId != null">
+                dep_id = #{depId,jdbcType=INTEGER},
+            </if>
+            <if test="clazzTeacherId != null">
+                clazz_teacher_id = #{clazzTeacherId,jdbcType=INTEGER},
+            </if>
+            <if test="clazzName != null">
+                clazz_name = #{clazzName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where clazz_id = #{clazzId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.whw.springboot.entity.Clazz">
+        <!--@mbg.generated-->
+        update clazz
+        set dep_id = #{depId,jdbcType=INTEGER},
+        clazz_teacher_id = #{clazzTeacherId,jdbcType=INTEGER},
+        clazz_name = #{clazzName,jdbcType=VARCHAR}
+        where clazz_id = #{clazzId,jdbcType=INTEGER}
+    </update>
+</mapper>

@@ -30,6 +30,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId> org.springframework.boot </groupId>
+            <artifactId> spring-boot-configuration-processor </artifactId>
+            <optional> true </optional>
+        </dependency>
+
 
         <!-- 小辣椒 -->
         <dependency>
@@ -124,6 +130,13 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!--json包 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.58</version>
         </dependency>
         <!-- Spring Boot中使用JavaMailSender发送邮件 -->
         <dependency>

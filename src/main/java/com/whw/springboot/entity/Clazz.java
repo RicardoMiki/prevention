@@ -1,5 +1,6 @@
 package com.whw.springboot.entity;
 
+import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -32,4 +33,10 @@ public class Clazz {
      */
     @ApiModelProperty(value = "班级名称")
     private String clazzName;
+
+    @IgnoreSwaggerParameter
+    private Userinfo userinfo;
+
+    @IgnoreSwaggerParameter
+    private Department department;
 }
