@@ -28,15 +28,7 @@ public class NoticeController {
 
     @ApiOperation(value = "添加notice，传入需要的参数即可,图片可以多传")
     @PostMapping(value = "notice", headers = "content-type=multipart/form-data")
-    public int insertNotice(Notice notice, @RequestParam(value = "file")MultipartFile[] files,
-                            RedirectAttributes redirectAttributes, HttpServletRequest request ){
-        String str = "";
-        for (MultipartFile multipartFile : files) {
-
-            str = LoadUtil.upload(multipartFile, request) + ";" + str;
-        }
-        notice.setNoticePic(str);
-
+    public int insertNotice(Notice notice){
 
         Date date=new Date();
         notice.setNoticeDate(date);

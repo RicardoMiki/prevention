@@ -104,6 +104,7 @@
             </if>
             <if test="orderStatus != null">
                 #{orderStatus,jdbcType=VARCHAR},
+
             </if>
         </trim>
     </insert>
