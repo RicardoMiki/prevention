@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.whw.springboot.mapper.ActivityMapper">
+    <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Activity">
+        <!--@Table activity-->
+        <id column="activity_id" jdbcType="INTEGER" property="activityId" />
+        <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+        <result column="activity_location" jdbcType="VARCHAR" property="activityLocation" />
+        <result column="activity_start_time" jdbcType="VARCHAR" property="activityStartTime" />
+        <result column="activity_end_time" jdbcType="VARCHAR" property="activityEndTime" />
+        <result column="activity_long_start_time" jdbcType="VARCHAR" property="activityStartTime" />
+        <result column="activity_long_end_time" jdbcType="VARCHAR" property="activityEndTime" />
+        <result column="activity_limit" jdbcType="INTEGER" property="activityLimit" />
+        <result column="activity_status" jdbcType="INTEGER" property="activityStatus" />
+        <result column="activity_type" jdbcType="INTEGER" property="activityType" />
+        <result column="activity_text" jdbcType="VARCHAR" property="activityText" />
+        <result column="activity_pic" jdbcType="VARCHAR" property="activityPic" />
+      </resultMap>
+
+    <sql id="Base_Column_List">
+
+        activity_id, activity_name, activity_location, activity_start_time,activity_end_time, activity_long_start_time, activity_long_end_time, activity_limit,
+        activity_status,activity_type,activity_text,activity_pic
+
+
+    </sql>
+
+
+    <insert id="insertActivity" parameterType="com.whw.springboot.entity.Activity" >
+        insert into activity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="activityName != null">
+                activity_name,
+            </if>
+            <if test="activityLocation != null">
+                activity_location,
+            </if>
+            <if test="activityStartTime != null">
+                activity_start_time,
+            </if>
+            <if test="activityEndTime != null">
+                activity_end_time,
+            </if>
+            <if test="activityStartTime != null">
+                activity_long_start_time,
+            </if>
+            <if test="activityEndTime != null">
+                activity_long_end_time,
+            </if>
+            <if test="activityLimit != null">
+                activity_limit,
+            </if>
+            <if test="activityStatus != null">
+                activity_status,
+            </if>
+            <if test="activityType != null">
+                activity_type,
+            </if>
+            <if test="activityText != null">
+                activity_text,
+            </if>
+            <if test="activityPic != null">
+                activity_pic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="activityId != null">
+                #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityLocation != null">
+                #{activityLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="activityStartTime != null">
+                #{activityStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityEndTime != null">
+                #{activityEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityStartTime != null">
+                #{activityStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityEndTime != null">
+                #{activityEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityLimit != null">
+                #{activityLimit,jdbcType=INTEGER},
+            </if>
+            <if test="activityStatus != null">
+                #{activityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="activityType != null">
+                #{activityType,jdbcType=INTEGER},
+            </if>
+            <if test="activityText != null">
+                #{activityText,jdbcType=VARCHAR},
+            </if>
+            <if test="activityPic != null">
+                #{activityPic,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateActivity" parameterType="com.whw.springboot.entity.Activity">
+        update activity
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=INTEGER},
+            </if>
+            <if test="activityName != null">
+                activity_name = #{activityName,jdbcType=VARCHAR},
+            </if>
+            <if test="activityLocation != null">
+                activity_location = #{activityLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="activityStartTime != null">
+                activity_start_time = #{activityStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityEndTime != null">
+                activity_end_time = #{activityEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityStartTime != null">
+                activity_long_start_time = #{activityStartTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityEndTime != null">
+                activity_long_end_time = #{activityEndTime,jdbcType=VARCHAR},
+            </if>
+            <if test="activityLimit != null">
+                activity_limit = #{activityLimit,jdbcType=INTEGER},
+            </if>
+            <if test="activityStatus != null">
+                activity_status = #{activityStatus,jdbcType=INTEGER},
+            </if>
+            <if test="activityType != null">
+                activity_type = #{activityType,jdbcType=INTEGER},
+            </if>
+            <if test="activityText != null">
+                activity_text = #{activityText,jdbcType=VARCHAR},
+            </if>
+            <if test="activityPic != null">
+                activity_pic = #{activityPic,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where activity_id = #{activityId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="deleteActivity" parameterType="java.lang.Integer">
+        delete from activity
+        where activity.activity_id = #{activityId,jdbcType=INTEGER}
+    </delete>
+
+    <select id="selectActivity"  parameterType="com.whw.springboot.entity.Activity" resultMap="BaseResultMap">
+        select * from activity
+        <where>
+            <if test="activityId != null">
+                activity_id = #{activityId}
+            </if>
+            <if test="activityName != null">
+                activity_name = #{activityName}
+            </if>
+            <if test="activityLocation != null">
+                activity_location = #{activityLocation}
+            </if>
+            <if test="activityStartTime != null">
+                activity_start_time = #{activityStartTime}
+            </if>
+            <if test="activityEndTime != null">
+                activity_end_time = #{activityEndTime}
+            </if>
+            <if test="activityStartTime != null">
+                activity_long_start_time = #{activityStartTime}
+            </if>
+            <if test="activityEndTime != null">
+                activity_long_end_time = #{activityEndTime}
+            </if>
+            <if test="activityLimit != null">
+                activity_limit = #{activityLimit}
+            </if>
+            <if test="activityStatus != null">
+                activity_status = #{activityStatus}
+            </if>
+            <if test="activityType != null">
+                activity_type = #{activityType}
+            </if>
+        </where>
+    </select>
+</mapper>
