@@ -15,22 +15,37 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityMapper activityMapper;
 
     @Override
-    public int insertActivity(Activity activity) {
-        return activityMapper.insertActivity(activity);
+    public int deleteByPrimaryKey(Integer activityId) {
+        return activityMapper.deleteByPrimaryKey(activityId);
     }
 
     @Override
-    public int deleteActivity(int activityId) {
-        return activityMapper.deleteActivity(activityId);
+    public int insert(Activity record) {
+        return activityMapper.insert(record);
     }
 
     @Override
-    public int updateActivity(Activity activity) {
-        return activityMapper.updateActivity(activity);
+    public int insertSelective(Activity record) {
+        return activityMapper.insertSelective(record);
     }
 
     @Override
-    public List<Activity> selectActivity(Activity activity) {
-        return activityMapper.selectActivity(activity);
+    public Activity selectByPrimaryKey(Integer activityId) {
+        return activityMapper.selectByPrimaryKey(activityId);
+    }
+
+    @Override
+    public int updateByPrimaryKeySelective(Activity record) {
+        return activityMapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public int updateByPrimaryKey(Activity record) {
+        return activityMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public List<Activity> selectAllActivity(Activity activity) {
+        return activityMapper.selectAllActivity(activity);
     }
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.SignMapper">
+  <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Sign">
+    <!--@mbg.generated-->
+    <!--@Table sign-->
+    <id column="sign_id" jdbcType="INTEGER" property="signId" />
+    <result column="sign_activity_id" jdbcType="INTEGER" property="signActivityId" />
+    <result column="sign_userid" jdbcType="VARCHAR" property="signUserid" />
+    <result column="sign_exp" jdbcType="VARCHAR" property="signExp" />
+    <result column="sign_status" jdbcType="INTEGER" property="signStatus" />
+    <result column="sign_date" jdbcType="VARCHAR" property="signDate" />
+    <result column="sign_actdate" jdbcType="VARCHAR" property="signActdate" />
+    <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+      <id column="user_id" jdbcType="VARCHAR" property="userId" />
+      <result column="dep_id" jdbcType="INTEGER" property="depId" />
+
+      <result column="class_id" jdbcType="INTEGER" property="classId" />
+
+      <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+      <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+      <result column="user_type" jdbcType="INTEGER" property="userType" />
+    </association>
+    <association property="activity" javaType="com.whw.springboot.entity.Activity">
+      <id column="activity_id" jdbcType="INTEGER" property="activityId" />
+      <result column="activity_name" jdbcType="VARCHAR" property="activityName" />
+      <result column="activity_location" jdbcType="VARCHAR" property="activityLocation" />
+      <result column="activity_start_time" jdbcType="VARCHAR" property="activityStartTime" />
+      <result column="activity_end_time" jdbcType="VARCHAR" property="activityEndTime" />
+      <result column="activity_long_start_time" jdbcType="VARCHAR" property="activityLongStartTime" />
+      <result column="activity_long_end_time" jdbcType="VARCHAR" property="activityLongEndTime" />
+      <result column="activity_limit" jdbcType="INTEGER" property="activityLimit" />
+      <result column="activity_status" jdbcType="INTEGER" property="activityStatus" />
+      <result column="activity_type" jdbcType="INTEGER" property="activityType" />
+      <result column="activity_text" jdbcType="LONGVARCHAR" property="activityText" />
+      <result column="activity_pic" jdbcType="LONGVARCHAR" property="activityPic" />
+     </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sign_id, sign_activity_id, sign_userid, sign_exp, sign_status, sign_date, sign_actdate
+  </sql>
+
+  <sql id="select">
+
+  	SELECT
+	*
+FROM
+	`sign`
+	LEFT JOIN `activity` on `sign`.sign_activity_id=`activity`.activity_id
+	LEFT JOIN userinfo on `sign`.sign_userid=userinfo.user_id
+
+  </sql>
+
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from sign
+    where sign_id = #{signId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllSign" parameterType="com.whw.springboot.entity.Sign" resultMap="BaseResultMap">
+    <include refid="select" />
+        <where>
+          <if test="signId != null ">
+            `sign`.sign_id = #{signId}
+          </if>
+          <if test="signActivityId != null">
+            and `sign`.sign_activity_id = #{signActivityId}
+          </if>
+          <if test="signUserid != null">
+            and `sign`.sign_userid = #{signUserid}
+          </if>
+          <if test="signExp != null">
+            and `sign`.sign_exp = #{signExp}
+          </if>
+          <if test="signStatus != null">
+            and `sign`.sign_status = #{signStatus}
+          </if>
+          <if test="signDate != null">
+            and `sign`.sign_date = #{signDate}
+          </if>
+          <if test="signActdate != null">
+            and `sign`.sign_actdate = #{signActdate}
+          </if>
+        </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from sign
+    where sign_id = #{signId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="sign_id" keyProperty="signId" parameterType="com.whw.springboot.entity.Sign" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sign (sign_activity_id, sign_userid, sign_exp, 
+      sign_status, sign_date, sign_actdate
+      )
+    values (#{signActivityId,jdbcType=INTEGER}, #{signUserid,jdbcType=VARCHAR}, #{signExp,jdbcType=VARCHAR}, 
+      #{signStatus,jdbcType=INTEGER}, #{signDate,jdbcType=VARCHAR}, #{signActdate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="sign_id" keyProperty="signId" parameterType="com.whw.springboot.entity.Sign" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into sign
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="signActivityId != null">
+        sign_activity_id,
+      </if>
+      <if test="signUserid != null">
+        sign_userid,
+      </if>
+      <if test="signExp != null">
+        sign_exp,
+      </if>
+      <if test="signStatus != null">
+        sign_status,
+      </if>
+      <if test="signDate != null">
+        sign_date,
+      </if>
+      <if test="signActdate != null">
+        sign_actdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="signActivityId != null">
+        #{signActivityId,jdbcType=INTEGER},
+      </if>
+      <if test="signUserid != null">
+        #{signUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="signExp != null">
+        #{signExp,jdbcType=VARCHAR},
+      </if>
+      <if test="signStatus != null">
+        #{signStatus,jdbcType=INTEGER},
+      </if>
+      <if test="signDate != null">
+        #{signDate,jdbcType=VARCHAR},
+      </if>
+      <if test="signActdate != null">
+        #{signActdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whw.springboot.entity.Sign">
+    <!--@mbg.generated-->
+    update sign
+    <set>
+      <if test="signActivityId != null">
+        sign_activity_id = #{signActivityId,jdbcType=INTEGER},
+      </if>
+      <if test="signUserid != null">
+        sign_userid = #{signUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="signExp != null">
+        sign_exp = #{signExp,jdbcType=VARCHAR},
+      </if>
+      <if test="signStatus != null">
+        sign_status = #{signStatus,jdbcType=INTEGER},
+      </if>
+      <if test="signDate != null">
+        sign_date = #{signDate,jdbcType=VARCHAR},
+      </if>
+      <if test="signActdate != null">
+        sign_actdate = #{signActdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sign_id = #{signId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whw.springboot.entity.Sign">
+    <!--@mbg.generated-->
+    update sign
+    set sign_activity_id = #{signActivityId,jdbcType=INTEGER},
+      sign_userid = #{signUserid,jdbcType=VARCHAR},
+      sign_exp = #{signExp,jdbcType=VARCHAR},
+      sign_status = #{signStatus,jdbcType=INTEGER},
+      sign_date = #{signDate,jdbcType=VARCHAR},
+      sign_actdate = #{signActdate,jdbcType=VARCHAR}
+    where sign_id = #{signId,jdbcType=INTEGER}
+  </update>
+</mapper>

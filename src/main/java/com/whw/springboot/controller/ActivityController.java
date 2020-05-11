@@ -1,14 +1,12 @@
 package com.whw.springboot.controller;
 
 import com.whw.springboot.entity.Activity;
-import com.whw.springboot.entity.Article;
 import com.whw.springboot.service.ActivityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = { "http://localhost:8080", "null" })
@@ -21,13 +19,17 @@ public class ActivityController {
     private ActivityService activityService;
 
     /**
-     * int insertActivity(Activity activity);
+     *int deleteByPrimaryKey(Integer activityId);
      *
-     *     int deleteActivity(int activityId);
+     *     int insert(Activity record);
      *
-     *     int updateActivity(Activity activity);
+     *     int insertSelective(Activity record);
      *
-     *     List<Activity> selectActivity(Activity activity);
+     *     Activity selectByPrimaryKey(Integer activityId);
+     *
+     *     int updateByPrimaryKeySelective(Activity record);
+     *
+     *     int updateByPrimaryKey(Activity record);
      *
      */
 
@@ -38,7 +40,7 @@ public class ActivityController {
     @ApiOperation(value = "添加活动")
     @PostMapping(value = "insertActivity")
     public int insertActivity(Activity activity) {
-        return activityService.insertActivity(activity);
+        return activityService.insertSelective(activity);
     }
 
     /**
@@ -47,7 +49,7 @@ public class ActivityController {
     @ApiOperation(value = "修改活动")
     @PutMapping(value = "updateActivity")
     public int updateActivity(Activity activity){
-        return activityService.updateActivity(activity);
+        return activityService.updateByPrimaryKeySelective(activity);
     }
 
     /**
@@ -56,7 +58,7 @@ public class ActivityController {
     @ApiOperation(value = "删除活动")
     @DeleteMapping(value = "deleteActivity")
     public int deleteActivity(int activityId){
-        return activityService.deleteActivity(activityId);
+        return activityService.deleteByPrimaryKey(activityId);
     }
 
     /**
@@ -65,7 +67,7 @@ public class ActivityController {
     @ApiOperation(value = "查看所有活动")
     @GetMapping(value = "queryActivity")
     public List<Activity> selectActivity(Activity activity){
-        return activityService.selectActivity(activity);
+        return activityService.selectAllActivity(activity);
     }
 
 }

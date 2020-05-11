@@ -5,13 +5,17 @@ import com.whw.springboot.entity.Activity;
 import java.util.List;
 
 public interface ActivityService {
-    int insertActivity(Activity activity);
+    int deleteByPrimaryKey(Integer activityId);
 
-    int deleteActivity(int activityId);
+    int insert(Activity record);
 
-    int updateActivity(Activity activity);
+    int insertSelective(Activity record);
 
-    List<Activity> selectActivity(Activity activity);
+    Activity selectByPrimaryKey(Integer activityId);
 
+    int updateByPrimaryKeySelective(Activity record);
 
+    int updateByPrimaryKey(Activity record);
+
+    List<Activity> selectAllActivity(Activity activity);
 }

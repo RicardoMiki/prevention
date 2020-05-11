@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.whw.springboot.mapper.DutyMapper">
+  <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Duty">
+    <!--@mbg.generated-->
+    <!--@Table duty-->
+    <id column="duty_id" jdbcType="INTEGER" property="dutyId" />
+    <result column="duty_userid" jdbcType="VARCHAR" property="dutyUserid" />
+    <result column="duty_time" jdbcType="DATE" property="dutyTime" />
+
+    <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
+      <id column="user_id" jdbcType="VARCHAR" property="userId" />
+      <result column="dep_id" jdbcType="INTEGER" property="depId" />
+
+      <result column="class_id" jdbcType="INTEGER" property="classId" />
+
+      <result column="dormitory_id" jdbcType="INTEGER" property="dormitoryId" />
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+      <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+      <result column="user_idcard" jdbcType="VARCHAR" property="userIdCard" />
+      <result column="user_type" jdbcType="INTEGER" property="userType" />
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    duty_id, duty_userid, duty_time
+  </sql>
+
+  <sql id="select">
+
+  	SELECT
+	*
+FROM
+	`duty`
+	LEFT JOIN `userinfo` on `duty`.duty_userid=`userinfo`.user_id
+
+
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from duty
+    where duty_id = #{dutyId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllDuty" parameterType="com.whw.springboot.entity.Duty" resultMap="BaseResultMap">
+    <include refid="select" />
+    <where>
+      <if test="dutyId != null ">
+        `duty`.duty_id = #{dutyId}
+      </if>
+      <if test="dutyUserid != null">
+        and `duty`.duty_userid = #{dutyUserid}
+      </if>
+      <if test="dutyTime != null">
+        and `duty`.duty_time = #{dutyTime}
+      </if>
+    </where>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from duty
+    where duty_id = #{dutyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="duty_id" keyProperty="dutyId" parameterType="com.whw.springboot.entity.Duty" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into duty (duty_userid, duty_time)
+    values (#{dutyUserid,jdbcType=VARCHAR}, #{dutyTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" keyColumn="duty_id" keyProperty="dutyId" parameterType="com.whw.springboot.entity.Duty" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into duty
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dutyUserid != null">
+        duty_userid,
+      </if>
+      <if test="dutyTime != null">
+        duty_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dutyUserid != null">
+        #{dutyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyTime != null">
+        #{dutyTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.whw.springboot.entity.Duty">
+    <!--@mbg.generated-->
+    update duty
+    <set>
+      <if test="dutyUserid != null">
+        duty_userid = #{dutyUserid,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyTime != null">
+        duty_time = #{dutyTime,jdbcType=DATE},
+      </if>
+    </set>
+    where duty_id = #{dutyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.whw.springboot.entity.Duty">
+    <!--@mbg.generated-->
+    update duty
+    set duty_userid = #{dutyUserid,jdbcType=VARCHAR},
+      duty_time = #{dutyTime,jdbcType=DATE}
+    where duty_id = #{dutyId,jdbcType=INTEGER}
+  </update>
+</mapper>
