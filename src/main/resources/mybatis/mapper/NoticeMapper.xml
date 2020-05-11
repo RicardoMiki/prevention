@@ -14,7 +14,7 @@
         <result column="notice_date" jdbcType="DATE" property="noticeDate" />
         <result column="notice_state" jdbcType="INTEGER" property="noticeState" />
 
-        <association property="user" javaType="com.whw.springboot.entity.Userinfo">
+        <association property="userinfo" javaType="com.whw.springboot.entity.Userinfo">
             <id column="user_id" jdbcType="VARCHAR" property="userId" />
             <result column="dep_id" jdbcType="INTEGER" property="depId" />
 
@@ -37,8 +37,8 @@
 	*
 	FROM
 	notice
-	LEFT JOIN `user`
-	ON notice.user_id=`user`.user_id
+	LEFT JOIN `userinfo`
+	ON notice.user_id=`userinfo`.user_id
   </sql>
     <select id="selectByPrimaryKey" parameterType="com.whw.springboot.entity.NoticeNumber" resultMap="BaseResultMap">
         <!--@mbg.generated-->

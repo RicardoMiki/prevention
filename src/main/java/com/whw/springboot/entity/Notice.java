@@ -26,7 +26,7 @@ public class Notice {
     private Integer userId;
 
     @IgnoreSwaggerParameter
-    private Userinfo user;
+    private Userinfo userinfo;
     /**
      * 公告发布部门
      */
