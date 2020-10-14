@@ -37,7 +37,7 @@ public class ActivityController {
      * 添加活动
      *
      */
-    @ApiOperation(value = "添加活动")
+    @ApiOperation(value = "添加活动。")
     @PostMapping(value = "insertActivity")
     public int insertActivity(Activity activity) {
         return activityService.insertSelective(activity);
