@@ -75,7 +75,7 @@ public class UserController {
 	}
 
 	@ApiOperation(value="输入小程序端自动生成的code 返回对应的openid")
-	@GetMapping(value="openid" )
+	@GetMapping(value="openid")
 	public String getOpenId(String code) throws IOException {
 		return OpenId.userLogin(code);
 	}

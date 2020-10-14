@@ -3,7 +3,7 @@
 <mapper namespace="com.whw.springboot.mapper.UserinfoMapper">
     <resultMap id="BaseResultMap" type="com.whw.springboot.entity.Userinfo">
         <!--@mbg.generated-->
-        <!--@Table user-->
+        <!--@Table userinfo-->
         <id column="user_id" jdbcType="VARCHAR" property="userId" />
         <result column="dep_id" jdbcType="INTEGER" property="depId" />
 
