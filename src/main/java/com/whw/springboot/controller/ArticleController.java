@@ -1,8 +1,10 @@
 package com.whw.springboot.controller;
 
+import com.whw.springboot.config.GlobalConfig;
 import com.whw.springboot.entity.Article;
 import com.whw.springboot.entity.ArticleNumber;
 import com.whw.springboot.service.ArticleService;
+import com.whw.springboot.utils.GlobalFileUtils;
 import com.whw.springboot.utils.LoadUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +27,8 @@ import java.util.List;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+    @Resource
+    private GlobalConfig config;
 
 
     @ApiOperation(value = "图片和 文章分别传送，图片必填，文章填写所需部分")
@@ -70,9 +76,9 @@ public class ArticleController {
 
     @ApiOperation(value="上传图片")
     @PostMapping(value="Images" , headers = "content-type=multipart/form-data")
-    public String getImages(@RequestParam(value = "file") MultipartFile files,
-                            RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        return LoadUtil.upload(files, request);
+    public String getImages(@RequestParam(value = "file") MultipartFile[] files,
+                            RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+        return GlobalFileUtils.saveFileToTempDir("C:/prevention2.0-res/","https://prehealth.top/prevention2.0/",files);
 
     }
 
