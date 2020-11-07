@@ -1,5 +1,6 @@
 package com.whw.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -27,6 +28,7 @@ public class Duty {
     * 值班时间
     */
     @ApiModelProperty(value="值班时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date dutyTime;
 
     @ApiModelProperty(value = "值班时间传这个")

@@ -36,6 +36,7 @@ public class Oder {
      */
 
     @ApiModelProperty(value = "就诊预约时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date orderDate;
 
     @ApiModelProperty(value="就诊预约时间传入这个就行")
