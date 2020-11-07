@@ -68,6 +68,7 @@ public class Leave {
      * 请假单发布时间
      */
     @ApiModelProperty(value = "请假单发布时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date leavePostDate;
 
     /**

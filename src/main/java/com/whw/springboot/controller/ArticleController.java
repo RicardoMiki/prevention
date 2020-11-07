@@ -78,7 +78,7 @@ public class ArticleController {
     @PostMapping(value="Images" , headers = "content-type=multipart/form-data")
     public String getImages(@RequestParam(value = "file") MultipartFile[] files,
                             RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
-        return GlobalFileUtils.saveFileToTempDir("C:/prevention2.0-res/","https://prehealth.top/prevention2.0/",files);
+        return GlobalFileUtils.saveFileToTempDir("C:/prevention2.0-res/","https://prehealth.top/pre2.0/",files);
 
     }
 
@@ -86,11 +86,7 @@ public class ArticleController {
     @ApiOperation(value = "管理端查看文章，传入需要的参数即可")
     @GetMapping(value = "ArticleAdmin")
     public List<Article> queryArticlesAdmin(ArticleNumber articleNumber) {
-
         List<Article> articles = articleService.selectByNumberAdmin(articleNumber);
-
-
         return articles;
-
     }
 }

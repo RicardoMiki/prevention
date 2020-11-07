@@ -1,5 +1,6 @@
 package com.whw.springboot.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.whw.springboot.config.IgnoreSwaggerParameter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -59,6 +60,7 @@ public class Back {
      * 返校目标时间
      */
     @ApiModelProperty(value="返校目标时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date backTargetTime;
 
     @ApiModelProperty(value="返校目标时间传入这个就行")
@@ -67,6 +69,7 @@ public class Back {
      * 返回登记/申请 发送时间
      */
     @ApiModelProperty(value="返回登记/申请 发送时间")
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd")
     private Date backPostTime;
 
     /**
